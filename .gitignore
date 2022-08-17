@@ -1,5 +1,6 @@
 *.code-workspace
 /public/show-notes/**
+.vscode/**
 
 ############################
 # OS X
@@ -115,3 +116,4 @@ exports
 *.cache
 build
 .strapi-updater.json
+

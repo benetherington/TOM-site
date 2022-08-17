@@ -7,13 +7,28 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch via NPM",
+            "name": "Strapi Server",
             "runtimeExecutable": "npm",
             "runtimeArgs": [
                 "run",
                 "develop"
             ],
             "port": 9229,
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Eleventy Server",
+            "runtimeExecutable": "npx",
+            "runtimeArgs": [
+                "@11ty/eleventy",
+                "--serve"
+            ],
+            "port": 8080,
             "skipFiles": [
                 "<node_internals>/**"
             ],
