@@ -1,4 +1,5 @@
 ---
+layout: app
 pagination:
     data: episodes
     size: 1
@@ -6,6 +7,6 @@ pagination:
 permalink: '/show-notes/{{ episode.attributes.slug }}/index.html'
 ---
 
-# {{ episode.attributes.title }}
+<h1> {{ episode.attributes.title }} </h1>
 
 {{ episode.attributes.show_notes }}

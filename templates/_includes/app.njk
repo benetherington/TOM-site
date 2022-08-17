@@ -1,18 +1,21 @@
+---
+    title: The Orbital Mechanics Podcast
+---
 
 <!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+        {% block css %}
             <link rel="stylesheet" href="/stylesheets/app.css"/>
             <style>
                 #header-banner {
-                    background-image: url(/img/header--sls_flower.jpg);
+                    background-image: url({{ headers.randomHeaders[0] }});
                 }
             </style>
-        
-        <title>The Orbital Mechanics Podcast</title>
+        {% endblock %}
+        <title>{{ textDefaults.siteTitle }}</title>
     </head>
     <body>
         <div id="header-banner">
@@ -43,20 +46,7 @@
                     </div>
                 </div>
                 <div id="content">
-                    
-
-    <a href=/show-notes/the-big-rocket>
-        <h4>The Big Rocket</h4>
-    </a>
-    <p>It was a very, very big rocket.</p>
-    <hr></hr>
-
-    <a href=/show-notes/the-rocket-crashed>
-        <h4>The Crashed Rocket</h4>
-    </a>
-    <p>A rocket crashed</p>
-    <hr></hr>
-
+                    {{ content | safe }}
                 </div>
             </div>
         </div>

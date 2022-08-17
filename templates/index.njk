@@ -1,0 +1,14 @@
+---
+layout: app.njk
+pagination:
+    data: episodes
+    size: 10
+---
+
+{% for episode in episodes %}
+    <a href={{ "/show-notes/" + episode.attributes.slug | url }}>
+        <h4>{{ episode.attributes.title }}</h4>
+    </a>
+    <p>{{ episode.attributes.description }}</p>
+    <hr></hr>
+{% endfor %}
