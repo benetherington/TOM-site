@@ -5,9 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "node current file",
             "type": "node",
             "request": "launch",
+            "program": "${file}"
+        },
+        {
             "name": "Strapi Server",
+            "type": "node",
+            "request": "launch",
             "runtimeExecutable": "npm",
             "runtimeArgs": [
                 "run",
@@ -20,9 +26,9 @@
             "console": "integratedTerminal"
         },
         {
+            "name": "Eleventy Server",
             "type": "node",
             "request": "launch",
-            "name": "Eleventy Server",
             "runtimeExecutable": "npx",
             "runtimeArgs": [
                 "@11ty/eleventy",
