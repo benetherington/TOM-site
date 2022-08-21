@@ -1,5 +1,7 @@
 *.code-workspace
 /public/show-notes/**
+/public/*.html
+/public/**/*.html
 .vscode/**
 
 ############################
