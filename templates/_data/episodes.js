@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const qs = require('qs');
 
 const baseUrl = 'http://localhost:1337';
 
@@ -8,16 +9,23 @@ module.exports = async () => {
     const episodes = [];
 
     while (!doneFetching) {
-        // Perform request
-        const response = await fetch(
-            `${baseUrl}/api/episodes?pagination[page]=${page}`,
+        // Build and send request
+        const query = qs.stringify(
             {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
+                sort: ['ep_num:desc'],
+                pagination: {
+                    page,
                 },
+                publicationState: 'live',
             },
+            {encodeValuesOnly: true}, // prettify URL
         );
+        const response = await fetch(`${baseUrl}/api/episodes?${query}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+            },
+        });
         const jsn = await response.json();
 
         // Check response
