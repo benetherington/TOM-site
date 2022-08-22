@@ -8,6 +8,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         {% block css %}
+            <link rel="stylesheet" href="/stylesheets/font.css"/>
             <link rel="stylesheet" href="/stylesheets/app.css"/>
             <style>
                 #header-banner {
@@ -22,28 +23,21 @@
             <img id="header-logo" src="/img/banner-logo.svg">
         </div>
         <div id="page-container">
-            <div id="sidebar" class="hanging-tab">
-                <p>
-                    The Orbital Mechanics is a show about space and stuff.
-                </p>
+            <div>
+                {# Sidebar container, allow flex cross-axis shrink #}
+                <div id="sidebar" class="hanging-tab">
+                    <p>
+                        The Orbital Mechanics is a show about space and stuff.
+                    </p>
+                </div>
             </div>
             <div id="toolbar-and-content">
                 <div id="toolbar">
-                    <div class="hanging-tab">
-                        <a href="/store">Store</a>
-                    </div>
-                    <div class="hanging-tab">
-                        <a href="/support">Support</a>
-                    </div>
-                    <div class="hanging-tab">
-                        <a href="/subscribe">Subscribe</a>
-                    </div>
-                    <div class="hanging-tab">
-                        <a href="/about">About and Contact</a>
-                    </div>
-                    <div class="hanging-tab">
-                        <a href="/episodes">Episodes</a>
-                    </div>
+                    <a class="hanging-tab" href="/store">Store</a>
+                    <a class="hanging-tab" href="/support">Support</a>
+                    <a class="hanging-tab" href="/subscribe">Subscribe</a>
+                    <a class="hanging-tab" href="/about">About and Contact</a>
+                    <a class="hanging-tab" href="/episodes">Episodes</a>
                 </div>
                 <div id="content">
                     {{ content | safe }}

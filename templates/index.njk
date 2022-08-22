@@ -5,10 +5,12 @@ pagination:
     size: 10
 ---
 
-{% for episode in episodes %}
-    <a href={{ "/show-notes/" + episode.attributes.slug | url }}>
-        <h4>{{ episode.attributes | fullTitle }}</h4>
-    </a>
-    <p>{{ episode.attributes.description }}</p>
-    <hr></hr>
+{% for episode in pagination.items %}
+    <div class="episode-card">
+        <a class="episode-title" href={{ "/show-notes/" + episode.attributes.slug | url }}>
+            {{ episode.attributes | fullTitle }}
+        </a>
+        <p class="published-at">{{ episode.attributes.publishedAt | shortDate }}</p>
+        <p class="description">{{ episode.attributes.description }}</p>
+    </div>
 {% endfor %}

@@ -1,0 +1,189 @@
+@font-face {
+  font-family: "Novarese Ultra";
+  src: url("/img/Novarese-Ultra_Regular.woff");
+}
+
+@font-face {
+    font-family: Prompt;
+    font-weight: 900;
+    src: url("/font/Prompt-Black.ttf");
+}
+@font-face {
+    font-family: Prompt;
+    font-weight: 900;
+    font-style: italic;
+    src: url("/font/Prompt-BlackItalic.ttf");
+}
+
+@font-face {
+    font-family: Prompt;
+    font-weight: 800;
+    src: url("/font/Prompt-ExtraBold.ttf");
+}
+@font-face {
+    font-family: Prompt;
+    font-weight: 800;
+    font-style: italic;
+    src: url("/font/Prompt-ExtraBoldItalic.ttf");
+}
+
+@font-face {
+    font-family: Prompt;
+    font-weight: 700;
+    src: url("/font/Prompt-Bold.ttf");
+}
+@font-face {
+    font-family: Prompt;
+    font-weight: 700;
+    font-style: italic;
+    src: url("/font/Prompt-BoldItalic.ttf");
+}
+
+@font-face {
+    font-family: Prompt;
+    font-weight: 600;
+    src: url("/font/Prompt-SemiBold.ttf");
+}
+@font-face {
+    font-family: Prompt;
+    font-weight: 600;
+    font-style: italic;
+    src: url("/font/Prompt-SemiBoldItalic.ttf");
+}
+
+@font-face {
+    font-family: Prompt;
+    font-weight: 500;
+    src: url("/font/Prompt-Medium.ttf");
+}
+@font-face {
+    font-family: Prompt;
+    font-weight: 500;
+    font-style: italic;
+    src: url("/font/Prompt-MediumItalic.ttf");
+}
+
+@font-face {
+    font-family: Prompt;
+    font-weight: 400;
+    src: url("/font/Prompt-Regular.ttf");
+}
+@font-face {
+    font-family: Prompt;
+    font-weight: 400;
+    font-style: italic;
+    src: url("/font/Prompt-Italic.ttf");
+}
+
+@font-face {
+    font-family: Prompt;
+    font-weight: 300;
+    src: url("/font/Prompt-Light.ttf");
+}
+@font-face {
+    font-family: Prompt;
+    font-weight: 300;
+    font-style: italic;
+    src: url("/font/Prompt-LightItalic.ttf");
+}
+
+@font-face {
+    font-family: Prompt;
+    font-weight: 200;
+    src: url("/font/Prompt-ExtraLight.ttf");
+}
+@font-face {
+    font-family: Prompt;
+    font-weight: 200;
+    font-style: italic;
+    src: url("/font/Prompt-ExtraLightItalic.ttf");
+}
+
+@font-face {
+    font-family: Prompt;
+    font-weight: 100;
+    src: url("/font/Prompt-Thin.ttf");
+}
+@font-face {
+    font-family: Prompt;
+    font-weight: 100;
+    font-style: italic;
+    src: url("/font/Prompt-ThinItalic.ttf");
+}
+
+
+
+
+
+
+@font-face {
+    font-family: Besley;
+    font-weight: 900;
+    src: url("/font/Besley-Black.ttf");
+}
+@font-face {
+    font-family: Besley;
+    font-weight: 900;
+    font-style: italic;
+    src: url("/font/Besley-BlackItalic.ttf");
+}
+
+@font-face {
+    font-family: Besley;
+    font-weight: 800;
+    src: url("/font/Besley-ExtraBold.ttf");
+}
+@font-face {
+    font-family: Besley;
+    font-weight: 800;
+    font-style: italic;
+    src: url("/font/Besley-ExtraBoldItalic.ttf");
+}
+
+@font-face {
+    font-family: Besley;
+    font-weight: 700;
+    src: url("/font/Besley-Bold.ttf");
+}
+@font-face {
+    font-family: Besley;
+    font-weight: 700;
+    font-style: italic;
+    src: url("/font/Besley-BoldItalic.ttf");
+}
+
+@font-face {
+    font-family: Besley;
+    font-weight: 600;
+    src: url("/font/Besley-SemiBold.ttf");
+}
+@font-face {
+    font-family: Besley;
+    font-weight: 600;
+    font-style: italic;
+    src: url("/font/Besley-SemiBoldItalic.ttf");
+}
+
+@font-face {
+    font-family: Besley;
+    font-weight: 500;
+    src: url("/font/Besley-Medium.ttf");
+}
+@font-face {
+    font-family: Besley;
+    font-weight: 500;
+    font-style: italic;
+    src: url("/font/Besley-MediumItalic.ttf");
+}
+
+@font-face {
+    font-family: Besley;
+    font-weight: 400;
+    src: url("/font/Besley-Regular.ttf");
+}
+@font-face {
+    font-family: Besley;
+    font-weight: 400;
+    font-style: italic;
+    src: url("/font/Besley-Italic.ttf");
+}

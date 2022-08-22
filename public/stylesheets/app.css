@@ -1,9 +1,46 @@
-@font-face {
-  font-family: "Novarese Ultra";
-  src: url("/img/Novarese-Ultra_Regular.woff");
+/* COLORS */
+body {
+    --secondary-extra-dark: #771c29;
+    --secondary-dark: #bc1141;
+    --secondary-light: #e695a2;
+    --secondary-extra-light:#f59db4;
+    --primary-extra-dark: #0a3363;
+    --primary-dark: #1b619f;
+    --primary-light: #7bb3f2;
+    --primary-extra-light: #9bc7ee;
+    
+    --page-background: #1d273a;
+    --default-text: #99a2aa;
 }
 
-body { margin: 0; background-color: grey; }
+/* COMMON ROLES */
+
+a {
+    text-decoration: none;
+    color: var(--default-text);
+}
+a:hover { text-decoration: revert; }
+
+.episode-title {
+    font-family: Prompt;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+
+/* LAYOUT COMPONENTS */
+
+body {
+    /* Position */
+    margin: 0;
+    background-color: var(--page-background);
+    color: var(--default-text);
+    height: 100vh;
+    overflow: hidden;
+    
+    /* Style */
+    font-family: Besley;
+}
 
 #header-banner {
     width: 100%;
@@ -27,36 +64,82 @@ body { margin: 0; background-color: grey; }
 
 .hanging-tab {
     /* Style for the sidebar and nav buttons */
-    min-width: 100px;
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 0 0 5px 5px;
-    padding: 5px;
+    background-color: #2f3c57;
+    padding: 3px 9px;
+    border-radius: 0 0 8px 8px;
+    margin: 0 4px;
 }
 
+
 #sidebar {
-    width: 10vw;
-    margin-right: 2vw;
+    min-width: 15vw;
+    margin-right: 8px;
 }
 
 #toolbar-and-content {
-    width: 50vw;
-    display: relative;
+    min-width: 50vw;
+    height: 80vh;
+    position: relative;
 }
 
 #toolbar {
-    display: absolute;
-    width: 100%;
+    /* Allow content to scroll under */
+    position: absolute;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+    z-index: 1;
+}
+#toolbar::after {
+    /* Gradient background behind tabs */
+    position: absolute;
+    content: "";
+    z-index: -1;
+    width: calc(100% - 3px); /* don't hide scrollbar */
+    height: 80px;
+    background: linear-gradient(0, transparent, var(--page-background));
+    pointer-events: none;
 }
 
 #toolbar .hanging-tab {
+    font-family: Prompt;
+    font-weight: 500;
+    font-size: 20px;
     display: flex;
     justify-content: center;
 }
+#toolbar .hanging-tab { border-left: 1px solid #3d4b6a; }
+#toolbar .hanging-tab:hover { background-color: #3d4b6a; }
 
-#toolbar .hanging-tab:hover {
-    background-color: azure;
+#content {
+    height: 100%;
+    overflow-y: scroll;
+    scrollbar-width: thin;
 }
+#content::-webkit-scrollbar { width: 3px; }
+#content::-webkit-scrollbar-thumb {
+    background: var(--default-text);
+    border-radius: 1.5px;
+}
+
+.episode-card {
+    margin: 50px 0;
+    padding-right: 20px;
+}
+
+/* Don't start under toolbar shadow */
+.episode-card:first-of-type { margin-top: 80px; }
+
+.episode-card p { margin: 0; }
+
+.episode-card .published-at {
+    font-style: italic;
+    font-size: 13px;
+    margin-top: -6px;
+}
+
+.episode-card .description {
+    margin-top: 4px
+}
+

@@ -2,9 +2,9 @@ const fetch = require('node-fetch');
 const qs = require('qs');
 
 /*--------------------------------------------------------------------*\
-                        EPISODES COLLECTIONS
-This data set is used to fetch episodes for the home page and for the
-"more epsiodes" paginated pages.
+                        SINGLE EPISODE PAGES
+Despite the file name, this data set fetches and returns ALL episodes.
+It is used to generate each individual episode page.
 \*--------------------------------------------------------------------*/
 
 const baseUrl = 'http://localhost:1337';
