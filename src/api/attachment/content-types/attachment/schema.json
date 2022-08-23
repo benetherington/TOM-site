@@ -1,26 +1,32 @@
 {
-    "kind": "collectionType",
-    "collectionName": "attachments",
-    "info": {
-        "singularName": "attachment",
-        "pluralName": "attachments",
-        "displayName": "Attachment"
+  "kind": "collectionType",
+  "collectionName": "attachments",
+  "info": {
+    "singularName": "attachment",
+    "pluralName": "attachments",
+    "displayName": "Attachment",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "caption": {
+      "type": "string"
     },
-    "options": {
-        "draftAndPublish": false
+    "attribution": {
+      "type": "string"
     },
-    "pluginOptions": {},
-    "attributes": {
-        "caption": {
-            "type": "string"
-        },
-        "attribution": {
-            "type": "string"
-        },
-        "resource": {
-            "allowedTypes": ["images", "videos", "files", "audios"],
-            "type": "media",
-            "multiple": true
-        }
+    "resource": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "videos",
+        "files"
+      ]
     }
+  }
 }
