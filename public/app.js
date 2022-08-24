@@ -1,8 +1,7 @@
-let framePending = false;
-let headerLogo, sidebarLogo;
+let framePending;
 
 const resizeLogos = () => {
-    document.body.style = `--banner-scroll-adjustment: ${window.scrollY}px`;
+    document.body.style = `--scroll-position: ${window.scrollY}px`;
     framePending = false;
 };
 
@@ -16,5 +15,6 @@ const resizeOncePerFrame = () => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    resizeLogos();
     document.addEventListener('scroll', resizeOncePerFrame);
 });

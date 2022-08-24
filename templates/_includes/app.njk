@@ -7,6 +7,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/stylesheets/index.css"/>
         <link rel="stylesheet" href="/stylesheets/font.css"/>
         <link rel="stylesheet" href="/stylesheets/app.css"/> {% block css %}{% endblock %}
         <script src="/app.js"></script>
@@ -18,16 +19,13 @@
         <title>{{ textDefaults.siteTitle }}</title>
     </head>
     <body>
-        <div id="header-banner" class="sticky-header">
+        <div id="header-banner">
             <img id="header-logo" src="/img/banner-logo.svg">
         </div>
         <div id="page-container">
             <div>
                 {# Sidebar container, allow flex cross-axis shrink #}
                 <div id="sidebar" class="hanging-tab sticky-below-header">
-                    <div id="sidebar-logo-container">
-                        <img id="sidebar-logo" src="/img/banner-logo.svg">
-                    </div>
                     <p>
                         The Orbital Mechanics is a show about space and stuff.
                     </p>

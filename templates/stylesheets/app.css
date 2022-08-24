@@ -14,45 +14,40 @@ body {
 }
 
 /* COMMON ROLES */
-
 a {
     text-decoration: none;
     color: var(--default-text);
 }
 a:hover { text-decoration: revert; }
 
-.sticky-header, .sticky-below-header { position: sticky; }
-.sticky-header {
-    top: calc(
-        var(--banner-collapsed-height) -
-        var(--banner-full-height)
-    );
-}
-.sticky-below-header { top: var(--banner-collapsed-height) }
-
 /* LAYOUT COMPONENTS */
-
 body {
-    /* Position */
     margin: 0;
+    
+    font-family: Besley;
     background-color: var(--page-background);
     color: var(--default-text);
-    /* height: 100vh;
-    overflow: hidden; */
     
-    /* Style */
-    font-family: Besley;
-    --banner-full-height: 20vh;
     --banner-collapsed-height: 5vh;
-    --banner-scroll-adjustment: 0px;
+    --banner-expansion: 20vh;
+    
     --sidebar-width: 15vw;
+    --content-width: 50vw;
 }
 
 #header-banner {
+    position: sticky;
+    top: calc(-1 * var(--banner-expansion));
+    
+    /* Size */
     width: 100%;
-    height: var(--banner-full-height);
+    height: calc(
+        var(--banner-collapsed-height) +
+        var(--banner-expansion)
+    );
+    
+    /* Allow logo to be placed relative to center */
     display: flex;
-    align-items: flex-end;
     justify-content: center;
     
     /* Background image is set dynamically in the template file */
@@ -63,22 +58,19 @@ body {
     z-index: 2;
 }
 
-/* Scroll logos */
-#sidebar-logo-container {
-    display: flex;
-    justify-content: center;
-}
-#sidebar-logo {
-    height: var(--banner-scroll-adjustment);
-    max-height: calc(var(--banner-full-height) - 1vh );
-}
 #header-logo {
-    margin-bottom: 0.5vh;
-    height: calc(
-        var(--banner-full-height) -
-        var(--banner-scroll-adjustment) -
-        1vh
+    position: fixed;
+    height: calc( var(--banner-expansion) - 1vh );
+    padding-right: var(--content-width);
+    
+    margin-top: calc(
+        var(--banner-collapsed-height) / 2
     );
+    top: min(
+        calc(var(--scroll-position, 0) * 5/20),
+        var(--banner-collapsed-height)
+    );
+    
 }
 
 #page-container {
@@ -96,21 +88,33 @@ body {
     margin: 0 4px;
 }
 
-
 #sidebar {
-    min-width: var(--sidebar-width);
-    margin-right: 8px;
+    width: var(--sidebar-width);
+    
+    /* Fake fixed position without ruining flex */
+    position: sticky;
+    top: calc( var(--banner-expansion) + var(--banner-collapsed-height));
 }
 
-#toolbar-and-content {
-    min-width: 50vw;
-    height: 80vh;
-    position: relative;
+#sidebar::before {
+    /* Above-sidebar extension for shrinking banner */
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: var(--banner-expansion);
+    bottom: 100%;
+    left: 0;
+    /* Borrow .hanging-tab style */
+    background-color: #2f3c57;
 }
+
+#toolbar-and-content { width: var(--content-width); }
 
 #toolbar {
     /* Allow content to scroll under */
-    /* position: absolute; */
+    position: sticky;
+    top: var(--banner-collapsed-height);
+    
     display: flex;
     flex-direction: row;
     align-items: flex-start;
