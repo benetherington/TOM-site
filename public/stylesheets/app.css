@@ -21,12 +21,14 @@ a {
 }
 a:hover { text-decoration: revert; }
 
-.episode-title {
-    font-family: Prompt;
-    font-weight: 500;
-    font-size: 20px;
+.sticky-header, .sticky-below-header { position: sticky; }
+.sticky-header {
+    top: calc(
+        var(--banner-collapsed-height) -
+        var(--banner-full-height)
+    );
 }
-
+.sticky-below-header { top: var(--banner-collapsed-height) }
 
 /* LAYOUT COMPONENTS */
 
@@ -35,16 +37,18 @@ body {
     margin: 0;
     background-color: var(--page-background);
     color: var(--default-text);
-    height: 100vh;
-    overflow: hidden;
+    /* height: 100vh;
+    overflow: hidden; */
     
     /* Style */
     font-family: Besley;
+    --banner-full-height: 20vh;
+    --banner-collapsed-height: 5vh;
 }
 
 #header-banner {
     width: 100%;
-    height: 20vh;
+    height: var(--banner-full-height);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,7 +57,9 @@ body {
     background-position: center;
     background-size: cover;
 }
-#header-logo { height: 19vh; }
+
+/* Scroll logos */
+#header-logo { height: calc(var(--banner-full-height) - 1vh); }
 
 #page-container {
     /* A big container for everything not in the header. */
@@ -84,7 +90,7 @@ body {
 
 #toolbar {
     /* Allow content to scroll under */
-    position: absolute;
+    /* position: absolute; */
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -113,33 +119,8 @@ body {
 #toolbar .hanging-tab:hover { background-color: #3d4b6a; }
 
 #content {
-    height: 100%;
-    overflow-y: scroll;
-    scrollbar-width: thin;
-}
-#content::-webkit-scrollbar { width: 3px; }
-#content::-webkit-scrollbar-thumb {
-    background: var(--default-text);
-    border-radius: 1.5px;
+    
 }
 
-.episode-card {
-    margin: 50px 0;
-    padding-right: 20px;
-}
 
-/* Don't start under toolbar shadow */
-.episode-card:first-of-type { margin-top: 80px; }
-
-.episode-card p { margin: 0; }
-
-.episode-card .published-at {
-    font-style: italic;
-    font-size: 13px;
-    margin-top: -6px;
-}
-
-.episode-card .description {
-    margin-top: 4px
-}
 

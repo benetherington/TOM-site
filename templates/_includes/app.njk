@@ -7,32 +7,31 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        {% block css %}
-            <link rel="stylesheet" href="/stylesheets/font.css"/>
-            <link rel="stylesheet" href="/stylesheets/app.css"/>
-            <style>
-                #header-banner {
-                    background-image: url({{ headers.randomHeaders[0] }});
-                }
-            </style>
-        {% endblock %}
+        <link rel="stylesheet" href="/stylesheets/font.css"/>
+        <link rel="stylesheet" href="/stylesheets/app.css"/> {% block css %}{% endblock %}
+        <style>
+            #header-banner {
+                background-image: url({{ headers.randomHeaders[0] }});
+            }
+        </style>
         <title>{{ textDefaults.siteTitle }}</title>
     </head>
     <body>
-        <div id="header-banner">
+        <div id="header-banner" class="sticky-header">
             <img id="header-logo" src="/img/banner-logo.svg">
         </div>
         <div id="page-container">
             <div>
                 {# Sidebar container, allow flex cross-axis shrink #}
-                <div id="sidebar" class="hanging-tab">
+                <div id="sidebar" class="hanging-tab sticky-below-header">
+                    <img id="sidebar-logo" src="/img/banner-logo.svg">
                     <p>
                         The Orbital Mechanics is a show about space and stuff.
                     </p>
                 </div>
             </div>
             <div id="toolbar-and-content">
-                <div id="toolbar">
+                <div id="toolbar" class="sticky-below-header">
                     <a class="hanging-tab" href="/store">Store</a>
                     <a class="hanging-tab" href="/support">Support</a>
                     <a class="hanging-tab" href="/subscribe">Subscribe</a>
@@ -40,7 +39,9 @@
                     <a class="hanging-tab" href="/episodes">Episodes</a>
                 </div>
                 <div id="content">
-                    {{ content | safe }}
+                    {% block content %}
+                        {{ content | safe }}
+                    {% endblock %}
                 </div>
             </div>
         </div>
