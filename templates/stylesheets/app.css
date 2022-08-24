@@ -58,6 +58,9 @@ body {
     /* Background image is set dynamically in the template file */
     background-position: center;
     background-size: cover;
+    
+    /* Ensure content scrolls underneath the banner */
+    z-index: 2;
 }
 
 /* Scroll logos */
