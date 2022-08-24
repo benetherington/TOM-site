@@ -14,6 +14,7 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy({'templates/stylesheets': 'stylesheets'});
     eleventyConfig.addPassthroughCopy({'templates/img': 'img'});
     eleventyConfig.addPassthroughCopy({'templates/font': 'font'});
+    eleventyConfig.addPassthroughCopy({'templates/app.js': 'app.js'});
 
     // Filters
     eleventyConfig.addNunjucksFilter('fullTitle', fullTitle);

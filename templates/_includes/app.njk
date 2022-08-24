@@ -9,6 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/stylesheets/font.css"/>
         <link rel="stylesheet" href="/stylesheets/app.css"/> {% block css %}{% endblock %}
+        <script src="/app.js"></script>
         <style>
             #header-banner {
                 background-image: url({{ headers.randomHeaders[0] }});
@@ -24,7 +25,9 @@
             <div>
                 {# Sidebar container, allow flex cross-axis shrink #}
                 <div id="sidebar" class="hanging-tab sticky-below-header">
-                    <img id="sidebar-logo" src="/img/banner-logo.svg">
+                    <div id="sidebar-logo-container">
+                        <img id="sidebar-logo" src="/img/banner-logo.svg">
+                    </div>
                     <p>
                         The Orbital Mechanics is a show about space and stuff.
                     </p>
@@ -46,4 +49,4 @@
             </div>
         </div>
     </body>
-</html></body></html>
+</html>

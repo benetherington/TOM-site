@@ -44,13 +44,15 @@ body {
     font-family: Besley;
     --banner-full-height: 20vh;
     --banner-collapsed-height: 5vh;
+    --banner-scroll-adjustment: 0px;
+    --sidebar-width: 15vw;
 }
 
 #header-banner {
     width: 100%;
     height: var(--banner-full-height);
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     
     /* Background image is set dynamically in the template file */
@@ -59,7 +61,22 @@ body {
 }
 
 /* Scroll logos */
-#header-logo { height: calc(var(--banner-full-height) - 1vh); }
+#sidebar-logo-container {
+    display: flex;
+    justify-content: center;
+}
+#sidebar-logo {
+    height: var(--banner-scroll-adjustment);
+    max-height: calc(var(--banner-full-height) - 1vh );
+}
+#header-logo {
+    margin-bottom: 0.5vh;
+    height: calc(
+        var(--banner-full-height) -
+        var(--banner-scroll-adjustment) -
+        1vh
+    );
+}
 
 #page-container {
     /* A big container for everything not in the header. */
@@ -78,7 +95,7 @@ body {
 
 
 #sidebar {
-    min-width: 15vw;
+    min-width: var(--sidebar-width);
     margin-right: 8px;
 }
 
