@@ -58,19 +58,25 @@ body {
     z-index: 2;
 }
 
-#header-logo {
-    position: fixed;
-    height: calc( var(--banner-expansion) - 1vh );
-    padding-right: var(--content-width);
+#logo-link {
+    /* Envelop logo image, set above sidebar */
+    display: flex;
+    margin-right: var(--content-width);
     
+    /* Start vertically centered in header */
+    position: fixed;
     margin-top: calc(
         var(--banner-collapsed-height) / 2
     );
+    
+    /* Slide down to top of sidebar as page scrolls */
     top: min(
         calc(var(--scroll-position, 0) * 5/20),
         var(--banner-collapsed-height)
     );
-    
+}
+#header-logo {
+    height: calc( var(--banner-expansion) - 1vh );
 }
 
 #page-container {
