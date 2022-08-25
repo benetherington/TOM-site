@@ -1,4 +1,15 @@
-.episode-title {
-    font-size: 35px;
-    text-decoration: underline;
+.header-title {
+    width: var(--content-width);
+    margin-left: var(--sidebar-width);
+    
+    font-family: Prompt;
+    font-size: 7vh;
+    text-align: center;
+    color: #d2d2d2;
+    text-shadow: 0 0 20px #404040;
+}
+
+#header-banner.dark-text .header-title {
+    color: #959595;
+    text-shadow: 0 0 20px #959595;
 }

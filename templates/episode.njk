@@ -7,12 +7,20 @@ permalink: '/show-notes/{{ episode.attributes.slug }}/index.html'
 ---
 
 {% extends "app.njk" %}
+
 {% block css %}
     <link rel="stylesheet" href="/stylesheets/episode.css"/>
 {% endblock %}
+
+{% block headerText %}
+    <div class="header-title">{{ episode.attributes | wrapTitle | safe }}</div>
+{% endblock %}
+
 {% block content %}
-    <h1 class="episode-title">
-        {{ episode.attributes | fullTitle }}
-    </h1>
     {{ episode.attributes | formatNotes | safe }}
+    <p>Images below:</p>
+    {% for image in episode.attributes.attachments %}
+        image
+    {% endfor %}
+    <p>Images above:</p>
 {% endblock %}

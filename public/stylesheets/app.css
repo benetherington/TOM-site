@@ -10,7 +10,7 @@ body {
     --primary-extra-light: #9bc7ee;
     
     --page-background: #1d273a;
-    --default-text: #99a2aa;
+    --default-text: #b2bdc6;
 }
 
 /* COMMON ROLES */
@@ -49,6 +49,7 @@ body {
     /* Allow logo to be placed relative to center */
     display: flex;
     justify-content: center;
+    align-items: flex-end;
     
     /* Background image is set dynamically in the template file */
     background-position: center;
@@ -148,9 +149,7 @@ body {
 #toolbar .hanging-tab { border-left: 1px solid #3d4b6a; }
 #toolbar .hanging-tab:hover { background-color: #3d4b6a; }
 
-#content {
-    
-}
+
 
 
 

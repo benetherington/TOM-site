@@ -1,9 +1,19 @@
-const fs = require('fs');
+const headers = [
+    {
+        url: '/img/header--cygnus_iss.jpg',
+        textStyle: 'light-text',
+    },
+    {
+        url: '/img/header--jwst_first_deep_field.png',
+        textStyle: 'light-text',
+    },
+    {
+        url: '/img/header--sls_flower.jpg',
+        textStyle: 'dark-text',
+    },
+];
 
-const imgFileNames = Array.from(fs.readdirSync('./templates/img'));
-const fileNames = imgFileNames.filter((fn) => fn.startsWith('header--'));
-const urls = fileNames.map((fn) => `/img/${fn}`);
-const randomHeaders = urls.sort(() => {
+const randomHeaders = headers.sort(() => {
     return 0.5 - Math.random();
 });
 

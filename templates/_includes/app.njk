@@ -9,28 +9,30 @@
         <script src="/app.js"></script>
         <style>
             #header-banner {
-                background-image: url({{ headers.randomHeaders[0] }});
+                background-image: url({{ headers.randomHeaders[0].url }});
             }
         </style>
         <title>{{ textDefaults.siteTitle }}</title>
     </head>
     <body>
-        <div id="header-banner">
+
+        <div id="header-banner" class="{{ headers.randomHeaders[0].textStyle }}">
             <a href="/" id="logo-link">
                 <img id="header-logo" src="/img/banner-logo.svg">
             </a>
+            {% block headerText %}{% endblock %}
         </div>
         <div id="page-container">
             <div>
                 {# Sidebar container, allow flex cross-axis shrink #}
-                <div id="sidebar" class="hanging-tab sticky-below-header">
+                <div id="sidebar" class="hanging-tab">
                     <p>
                         The Orbital Mechanics is a show about space and stuff.
                     </p>
                 </div>
             </div>
             <div id="toolbar-and-content">
-                <div id="toolbar" class="sticky-below-header">
+                <div id="toolbar">
                     <a class="hanging-tab" href="/store">Store</a>
                     <a class="hanging-tab" href="/support">Support</a>
                     <a class="hanging-tab" href="/subscribe">Subscribe</a>
