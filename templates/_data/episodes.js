@@ -2,12 +2,129 @@ const fetch = require('node-fetch');
 const qs = require('qs');
 
 /*--------------------------------------------------------------------*\
-                        EPISODES COLLECTIONS
-This data set is used to fetch episodes for the home page and for the
-"more epsiodes" paginated pages.
+A typical API response.json().data looks like:
+[
+    {
+        id: 123,
+        attributes: {
+            title, slug, show_notes, etc...
+            topics: [],
+            attachments: {
+                data: [{
+                        id: 123,
+                        attributes: {
+                            caption, attribution,
+                            resource: {
+                                data: {
+                                    id: 123,
+                                    attributes: {
+                                        name, alternativeText, caption,
+                                        width: 879,
+                                        height: 485,
+                                        url: '/uploads/axiom_segment_879x485_43aa1eb362.jpg',
+                                        previewUrl: null,
+                                        provider: 'local',
+                                        formats: {
+                                            medium: {width, height, url},
+                                            small: {width, height, url},
+                                            thumbnail: {width, height, url},
+                                        },
+                                    }
+                                }
+                            }
+                        }
+                }, ...]
+            },
+        },
+    },
+]
+
+A typical return value from this function looks like:
+[
+    {
+        id:123, ep_num: 123,
+        publishedAt, title, slug, description, show_notes,
+        audio: {},
+        topics: [],
+        attachments: [
+            {
+                id: 123,
+                caption, attribution,
+                full: {url, width, height},
+                medium: {url, width, height},
+                small: {url, width, height},
+                thumbnail: {url, width, height},
+            },
+        ],
+    }
+]
 \*--------------------------------------------------------------------*/
 
 const baseUrl = 'http://localhost:1337';
+
+const query = (page) =>
+    qs.stringify(
+        {
+            fields: '*',
+            populate: {
+                attachments: {
+                    populate: {
+                        caption: true,
+                        attribution: true,
+                        resource: '*',
+                    },
+                },
+            },
+            sort: ['ep_num:desc'],
+            pagination: {page},
+            publicationState: 'live',
+        },
+        {encodeValuesOnly: true}, // prettify URL
+    );
+
+const formatAttachment = ({id, attributes}) => {
+    const {caption, attribution} = attributes;
+    const resource = attributes.resource.data[0].attributes;
+    const full = {
+        url: resource.url,
+        width: resource.width,
+        height: resource.height,
+    };
+    const attachment = {id, caption, attribution, full};
+
+    if (resource.formats) {
+        const formats = Object.entries(resource.formats);
+        formats.forEach(([name, attrs]) => {
+            attachment[name] = {
+                url: attrs.url,
+                width: attrs.width,
+                height: attrs.height,
+            };
+        });
+    }
+
+    return attachment;
+};
+
+const formatEpisode = ({id, attributes}) => {
+    const {ep_num, publishedAt, title, slug, description, show_notes} =
+        attributes;
+    const audio = {};
+    const topics = [];
+    const attachments = attributes.attachments.data.map(formatAttachment);
+    return {
+        id,
+        ep_num,
+        publishedAt,
+        title,
+        slug,
+        description,
+        show_notes,
+        audio,
+        topics,
+        attachments,
+    };
+};
 
 module.exports = async () => {
     let page = 1;
@@ -16,22 +133,7 @@ module.exports = async () => {
 
     while (!doneFetching) {
         // Build and send request
-        const query = qs.stringify(
-            {
-                sort: ['ep_num:desc'],
-                pagination: {
-                    page,
-                },
-                publicationState: 'live',
-            },
-            {encodeValuesOnly: true}, // prettify URL
-        );
-        const response = await fetch(`${baseUrl}/api/episodes?${query}`, {
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-            },
-        });
+        const response = await fetch(`${baseUrl}/api/episodes?${query(page)}`);
         const jsn = await response.json();
 
         // Check response
@@ -42,8 +144,11 @@ module.exports = async () => {
             });
         }
 
+        // Format response
+        const formattedEpisodes = jsn.data.map(formatEpisode);
+
         // Store response
-        episodes.push(...jsn.data);
+        episodes.push(...formattedEpisodes);
 
         // Are we done?
         if (jsn.meta.pagination.pageCount < page) ++page;
@@ -52,3 +157,5 @@ module.exports = async () => {
 
     return episodes;
 };
+
+module.exports();
