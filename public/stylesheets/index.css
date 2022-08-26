@@ -1,11 +1,5 @@
 .episode-card {
-    margin: 50px 0;
-    padding-right: 20px;
-}
-.episode-card:first-child {
-    /* nudge up to padded top of #content */
-    /* Match H1 styling on episode page */
-    margin-top: 0.67em;
+    margin: 20px 20px 50px 20px;
 }
 
 .episode-title {
@@ -14,14 +8,37 @@
     font-size: 35px;
 }
 
+.episode-card .image-to-the-side {
+    display: grid;
+    grid-template: "image date"
+                   "image description"
+                   / 20%  80%;
+    column-gap: 10px;
+}
+
+.episode-card .thumbnail {
+    grid-area: image;
+    
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    
+    border-radius: 10px;
+    /* border: 2px solid var(--default-text); */
+    
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .episode-card p { margin: 0; }
 
 .episode-card .published-at {
+    grid-area: date;
     font-style: italic;
     font-size: 13px;
-    margin-top: -6px;
 }
 
 .episode-card .description {
-    margin-top: 4px
+    grid-area: description;
 }

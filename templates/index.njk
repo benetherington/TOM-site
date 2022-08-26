@@ -7,10 +7,13 @@ pagination:
 
 {% for episode in pagination.items %}
     <div class="episode-card">
-        <a class="episode-title" href={{ "/show-notes/" + episode.attributes.slug | url }}>
-            {{ episode.attributes | fullTitle }}
+        <a class="episode-title" href={{ "/show-notes/" + episode.slug | url }}>
+            {{ episode | fullTitle }}
         </a>
-        <p class="published-at">{{ episode.attributes.publishedAt | shortDate }}</p>
-        <p class="description">{{ episode.attributes.description }}</p>
+        <div class="image-to-the-side">
+            <div class="thumbnail" style="background-image: url({{ episode.attachments[0].thumbnail.url }});"></div>
+            <p class="published-at">{{ episode.publishedAt | shortDate }}</p>
+            <p class="description">{{ episode.description }}</p>
+        </div>
     </div>
 {% endfor %}

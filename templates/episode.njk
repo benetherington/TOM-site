@@ -3,7 +3,7 @@ pagination:
     data: episodes
     size: 1
     alias: episode
-permalink: '/show-notes/{{ episode.attributes.slug }}/index.html'
+permalink: '/show-notes/{{ episode.slug }}/index.html'
 ---
 
 {% extends "app.njk" %}
@@ -12,14 +12,18 @@ permalink: '/show-notes/{{ episode.attributes.slug }}/index.html'
     <link rel="stylesheet" href="/stylesheets/episode.css"/>
 {% endblock %}
 
+{% block headerUrl %}
+    {{ episode.attachments[0].full.url }}
+{% endblock %}
+
 {% block headerText %}
-    <div class="header-title">{{ episode.attributes | wrapTitle | safe }}</div>
+    <div class="header-title">{{ episode | wrapTitle | safe }}</div>
 {% endblock %}
 
 {% block content %}
-    {{ episode.attributes | formatNotes | safe }}
+    {{ episode | formatNotes | safe }}
     <p>Images below:</p>
-    {% for image in episode.attributes.attachments %}
+    {% for image in episode.attachments %}
         image
     {% endfor %}
     <p>Images above:</p>
