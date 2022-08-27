@@ -1,8 +1,5 @@
 *.code-workspace
-/public/show-notes/**
-/public/uploads/**
-/public/*.html
-/public/**/*.html
+/public/**
 .vscode/**
 
 ############################
