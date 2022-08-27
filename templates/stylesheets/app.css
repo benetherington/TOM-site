@@ -156,7 +156,9 @@ body {
 }
 #sidebar-buttons a:hover { background-color: #3d4b6a; }
 
-#content { width: var(--content-width); }
+#content {
+    width: var(--content-width);
+}
 
 
 

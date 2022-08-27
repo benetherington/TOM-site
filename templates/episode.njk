@@ -22,9 +22,12 @@ permalink: '/show-notes/{{ episode.slug }}/index.html'
 
 {% block content %}
     {{ episode | formatNotes | safe }}
-    <p>Images below:</p>
-    {% for image in episode.attachments %}
-        image
-    {% endfor %}
-    <p>Images above:</p>
+    <div id="attachments">
+        {% for image in episode.attachments %}
+            <div class="attachment">
+                <img src="{{ image.medium.url }}" alt=""></img>
+                <div class="caption">{{ image.caption }}</div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
