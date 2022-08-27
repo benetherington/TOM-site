@@ -17,8 +17,8 @@
     <body>
 
         <div id="header-banner" class="{{ headers.randomHeaders[0].textStyle }}">
-            <a href="/" id="logo-link">
-                <img id="header-logo" src="/img/banner-logo.svg">
+            <a href="/" id="logo">
+                {% include "../img/banner-logo.svg" %}
             </a>
             {% block headerText %}{% endblock %}
         </div>

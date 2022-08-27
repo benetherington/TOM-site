@@ -63,7 +63,7 @@ body {
     z-index: 2;
 }
 
-#logo-link {
+#logo {
     /* Envelop logo image, set above sidebar */
     display: flex;
     /* Offset atop header: include borders and gap */
@@ -85,7 +85,7 @@ body {
         var(--banner-collapsed-height)
     );
 }
-#header-logo {
+#logo svg {
     height: calc( var(--banner-expansion) - 1vh );
     max-width: var(--sidebar-width);
 }
