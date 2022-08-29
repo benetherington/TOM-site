@@ -17,14 +17,12 @@ body {
     --button-tab-color: #384468;
 }
 
-/* COMMON ROLES */
 a {
     text-decoration: none;
     color: var(--default-text);
 }
 a:hover { text-decoration: revert; }
 
-/* LAYOUT COMPONENTS */
 body {
     margin: 0;
     
@@ -43,15 +41,12 @@ body {
 #header-banner {
     position: sticky;
     top: calc(-1 * var(--banner-expansion));
-    
-    /* Size */
     width: 100%;
     height: calc(
         var(--banner-collapsed-height) +
         var(--banner-expansion)
     );
     
-    /* Allow logo to be placed relative to center */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -60,8 +55,8 @@ body {
     background-position: center;
     background-size: cover;
     
-    /* Ensure content scrolls underneath the banner */
-    z-index: 2;
+    /* Ensure above sidebar::before */
+    z-index: 1;
 }
 
 #page-container {
@@ -70,7 +65,12 @@ body {
     flex-direction: row;
     justify-content: center;
     gap: 1vw;
+}
 
+#sidebar-container {
+    /* Logo size is constrained in two dimensions. We'll need to know its height
+    to correctly place it as a """sticky""" element, so it's easiest to just
+    calculate the size here and re-use later. */
     --logo-height: min(
         calc( var(--banner-expansion) - 1vh ),
         calc( var(--sidebar-width) / 1.445 )
@@ -79,9 +79,11 @@ body {
 
 #logo {
     position: fixed;
-    z-index: 3;
+    z-index: 1;
     display: flex;
-    height: var(--logo-height);
+    justify-content: center;
+    width: var(--sidebar-width);
+    
     --start: calc(
         var(--banner-collapsed-height)/2 +
         var(--banner-expansion)/2 -
@@ -105,12 +107,9 @@ body {
         var(--start) * var(--weightStart) +
         var(--end) * var(--weightEnd)
     );
-    
-    /* calc(var(--scroll-position, 0) * 5/20) */
 }
 #logo svg {
-    /* height: calc( var(--banner-expansion) - 1vh ); */
-    max-width: var(--sidebar-width);
+    height: var(--logo-height);
 }
 
 #sidebar, #content {
@@ -121,7 +120,8 @@ body {
     box-sizing: border-box;
 }
 
-#sidebar::before, #content::before {
+#sidebar::before {
+    /* backdrop for logo when it slides out of header */
     background-color: var(--tab-color);
     border: 2px solid var(--tab-border);
     border-top: none;

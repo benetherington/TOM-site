@@ -43,7 +43,7 @@
     grid-area: description;
 }
 
-nav.page-buttons {
+#page-buttons {
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
@@ -52,7 +52,7 @@ nav.page-buttons {
     
 }
 
-nav a {
+#page-buttons a {
     font-family: prompt;
     font-weight: 200;
     text-decoration-thickness: 1px;
@@ -64,11 +64,11 @@ nav a {
     border-left: 1px solid var(--tab-border);
 }
 
-nav a:last-of-type {
+#page-buttons a:last-of-type {
     border-right: 1px solid var(--tab-border);
 }
 
-nav a[aria-current='page'] {
+#page-buttons a[aria-current='page'] {
     background-color: var(--default-text);
     color: var(--tab-color);
 }
