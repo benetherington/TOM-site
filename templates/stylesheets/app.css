@@ -54,7 +54,7 @@ body {
     /* Allow logo to be placed relative to center */
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     
     /* Background image is set dynamically in the template file */
     background-position: center;
