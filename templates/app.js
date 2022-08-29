@@ -1,20 +1,20 @@
 let framePending;
 
-const resizeLogos = () => {
-    document.body.style = `--scroll-position: ${window.scrollY}px`;
+const setScrollProperties = () => {
+    document.body.style.setProperty(
+        '--scroll-position-num',
+        window.scrollY / (window.innerHeight / 100),
+    );
     framePending = false;
 };
 
-const resizeOncePerFrame = () => {
-    if (!framePending) {
-        framePending = true;
-        requestAnimationFrame(resizeLogos);
-    } else {
-        console.log('skipped');
-    }
+const setScrollOncePerFrame = () => {
+    if (framePending) return;
+    framePending = true;
+    requestAnimationFrame(setScrollProperties);
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    resizeLogos();
-    document.addEventListener('scroll', resizeOncePerFrame);
+    setScrollProperties();
+    window.addEventListener('scroll', setScrollOncePerFrame);
 });

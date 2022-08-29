@@ -34,6 +34,7 @@ body {
     
     --banner-collapsed-height: 5vh;
     --banner-expansion: 20vh;
+    --banner-expansion-num: 20;
     
     --sidebar-width: 18vw;
     --content-width: 50vw;
@@ -63,39 +64,53 @@ body {
     z-index: 2;
 }
 
-#logo {
-    /* Envelop logo image, set above sidebar */
-    display: flex;
-    /* Offset atop header: include borders and gap */
-    margin-right: calc(
-        var(--content-width) +
-        2px * 3 +
-        1vw
-    );
-    
-    /* Start vertically centered in header */
-    position: fixed;
-    margin-top: calc(
-        var(--banner-collapsed-height) / 2
-    );
-    
-    /* Slide down to top of sidebar as page scrolls */
-    top: min(
-        calc(var(--scroll-position, 0) * 5/20),
-        var(--banner-collapsed-height)
-    );
-}
-#logo svg {
-    height: calc( var(--banner-expansion) - 1vh );
-    max-width: var(--sidebar-width);
-}
-
 #page-container {
     /* A big container for everything not in the header. */
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 1vw;
+
+    --logo-height: min(
+        calc( var(--banner-expansion) - 1vh ),
+        calc( var(--sidebar-width) / 1.445 )
+    );
+}
+
+#logo {
+    position: fixed;
+    z-index: 3;
+    display: flex;
+    height: var(--logo-height);
+    --start: calc(
+        var(--banner-collapsed-height)/2 +
+        var(--banner-expansion)/2 -
+        var(--logo-height)/2
+    );
+    --end: calc(
+        var(--banner-collapsed-height) +
+        10px
+    );
+    --weightEnd: calc(
+        min(
+            var(--scroll-position-num, 0),
+            var(--banner-expansion-num)
+        )
+        / var(--banner-expansion-num)
+    );
+    --weightStart: calc(
+        1 - var(--weightEnd)
+    );
+    top: calc(
+        var(--start) * var(--weightStart) +
+        var(--end) * var(--weightEnd)
+    );
+    
+    /* calc(var(--scroll-position, 0) * 5/20) */
+}
+#logo svg {
+    /* height: calc( var(--banner-expansion) - 1vh ); */
+    max-width: var(--sidebar-width);
 }
 
 #sidebar, #content {
@@ -125,7 +140,10 @@ body {
     display: flex;
     flex-direction: column;
     
-    top: calc( var(--banner-expansion) + var(--banner-collapsed-height));
+    top: calc(
+        var(--banner-collapsed-height) +
+        var(--logo-height)
+    );
     width: var(--sidebar-width);
     padding: 0;
     border-radius: 0 0 8px 8px;

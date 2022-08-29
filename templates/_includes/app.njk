@@ -16,35 +16,34 @@
     </head>
     <body>
 
-        <div id="header-banner" class="{{ headers.randomHeaders[0].textStyle }}">
-            <a href="/" id="logo">
-                {% include "../img/banner-logo.svg" %}
-            </a>
-            {% block headerText %}{% endblock %}
-        </div>
-        <div id="page-container">
-            <div>
-                {# Sidebar container, allow flex cross-axis shrink #}
-                <div id="sidebar">
-                    <p>
-                        Weekly insights into spaceflight engineering news, interviews and discussions. Listen in for technical details,
-                        corrections from people in the know and "one step deeper" knowledge.
-                    </p>
-                    <div
-                        id="sidebar-buttons">
-                        {# <a href="/episodes">Episodes</a> #}
-                        <a href="/subscribe">Subscribe</a>
-                        <a href="/store">Store</a>
-                        <a href="/support">Support</a>
-                        <a href="/about">About and Contact</a>
+        <div id="header-banner" class="{{ headers.randomHeaders[0].textStyle }}"> {% block headerText %}{% endblock %}
+            </div>
+            <div id="page-container">
+                <div>
+                    {# Sidebar container, allow flex cross-axis shrink #}
+                    <a href="/" id="logo">
+                        {% include "../img/banner-logo.svg" %}
+                    </a>
+                    <div id="sidebar">
+                        <p>
+                            Weekly insights into spaceflight engineering news, interviews and discussions. Listen in for technical details,
+                            corrections from people in the know and "one step deeper" knowledge.
+                        </p>
+                        <div
+                            id="sidebar-buttons">
+                            {# <a href="/episodes">Episodes</a> #}
+                            <a href="/subscribe">Subscribe</a>
+                            <a href="/store">Store</a>
+                            <a href="/support">Support</a>
+                            <a href="/about">About and Contact</a>
+                        </div>
                     </div>
                 </div>
+                <div id="content">
+                    {% block content %}
+                        {{ content | safe }}
+                    {% endblock %}
+                </div>
             </div>
-            <div id="content">
-                {% block content %}
-                    {{ content | safe }}
-                {% endblock %}
-            </div>
-        </div>
-    </body>
-</html>
+        </body>
+    </html>
