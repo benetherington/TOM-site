@@ -42,3 +42,34 @@
 .episode-card .description {
     grid-area: description;
 }
+
+nav.page-buttons {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    
+    border-top: 2px dotted var(--tab-border);
+    
+}
+
+nav a {
+    font-family: prompt;
+    font-weight: 200;
+    text-decoration-thickness: 1px;
+    font-size: 25px;
+    text-align: center;
+    
+    min-width: 15px;
+    padding: 0 10px;
+    border-left: 1px solid var(--tab-border);
+}
+
+nav a:last-of-type {
+    border-right: 1px solid var(--tab-border);
+}
+
+nav a[aria-current='page'] {
+    background-color: var(--default-text);
+    color: var(--tab-color);
+}
+

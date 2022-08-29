@@ -17,3 +17,11 @@ pagination:
         </div>
     </div>
 {% endfor %}
+
+<nav class="page-buttons" aria-label="episode pagination">
+    {% for pageEntry in pagination.pages %}
+        <a href="{{ pagination.hrefs[ loop.index0 ] }}" {% if page.url == pagination.hrefs[ loop.index0 ] %} aria-current="page" {% endif %}>
+            {{ loop.index }}
+        </a>
+    {% endfor %}
+</nav>
