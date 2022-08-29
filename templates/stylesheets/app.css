@@ -171,6 +171,8 @@ body {
     text-decoration-thickness: 1px;
     
     padding: 0 20px;
+    text-indent: -10%;
+    padding-left: calc(10% + 20px);
 }
 #sidebar-buttons a:hover { background-color: #3d4b6a; }
 
