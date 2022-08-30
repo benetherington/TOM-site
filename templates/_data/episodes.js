@@ -151,11 +151,9 @@ module.exports = async () => {
         episodes.push(...formattedEpisodes);
 
         // Are we done?
-        if (jsn.meta.pagination.pageCount < page) ++page;
+        if (jsn.meta.pagination.pageCount > page) ++page;
         else doneFetching = true;
     }
 
     return episodes;
 };
-
-module.exports();
