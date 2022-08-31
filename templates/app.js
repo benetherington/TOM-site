@@ -13,24 +13,47 @@ const setScrollOncePerFrame = () => {
 };
 
 const paginationSlideLeft = () => {
-    document.getElementById('nav-container').scrollLeft -= 400;
+    document.getElementById('pagination-container').scrollLeft -= 400;
 };
 const paginationSlideRight = () => {
-    document.getElementById('nav-container').scrollLeft += 400;
+    document.getElementById('pagination-container').scrollLeft += 400;
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Logo scroll event
     setScrollProperties();
     window.addEventListener('scroll', setScrollOncePerFrame);
+
+    // Pagination scroll buttons
     document
-        .querySelector('#page-bar .slide-left')
+        .querySelector('#pagination-bar .slide-left')
         .addEventListener('click', paginationSlideLeft);
     document
-        .querySelector('#page-bar .slide-right')
+        .querySelector('#pagination-bar .slide-right')
         .addEventListener('click', paginationSlideRight);
+
+    // Focus current pagination page in the pagination bar
+    const currentPageLeft = document
+        .querySelector('a[aria-current="page"]')
+        .getClientRects()[0].left;
+    const paginationContainer = document.getElementById('pagination-container');
+    const paginationContainerLeft =
+        paginationContainer.getClientRects()[0].left;
+    const paginationContainerWidth =
+        paginationContainer.getClientRects()[0].width;
+    const scrollTo =
+        (currentPageLeft -
+            paginationContainerLeft -
+            paginationContainerWidth / 2) *
+        1.1;
     setTimeout(() => {
-        document
-            .querySelector('a[aria-current="page"]')
-            .scrollIntoView({inline: 'center'});
-    }, 0);
+        paginationContainer.scrollTo({
+            behavior: 'instant',
+            left: scrollTo,
+        });
+    }, 20);
+    setTimeout(() => {
+        console.log(scrollTo);
+        console.log(paginationContainer.scrollLeft);
+    }, 40);
 });
