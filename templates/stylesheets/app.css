@@ -178,7 +178,15 @@ body {
 
 #content {
     width: var(--content-width);
+    border-bottom: none;
 }
 
-
+#footer {
+    border-top: 3px solid var(--tab-border);
+    
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+}
 
