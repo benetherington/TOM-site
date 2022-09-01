@@ -1,5 +1,5 @@
 /* COLORS */
-body {
+:root {
     --secondary-extra-dark: #771c29;
     --secondary-dark: #bc1141;
     --secondary-light: #e695a2;
@@ -34,9 +34,19 @@ body {
     --banner-expansion: 20vh;
     --banner-expansion-num: 20;
     
-    --sidebar-width: 18vw;
-    --content-width: 50vw;
+    --sidebar-width: max(18vw, 200px);
+    --content-width: max(50vw, 600px);
 }
+@media screen and (max-width: 850px) {
+    /* Reduced margins layout for large phones, tablets */
+    body {
+        --banner-collapsed-height: 0px;
+        
+        --sidebar-width: 30vw;
+        --content-width: 70vw;
+    }
+}
+
 
 #header-banner {
     position: sticky;
@@ -64,7 +74,11 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 1vw;
+    gap: 10px;
+}
+@media screen and (max-width: 850px) {
+    /* Reduced margins layout for large phones, tablets */
+    #page-container { gap: 0; }
 }
 
 #sidebar-container {
@@ -111,6 +125,13 @@ body {
 #logo svg {
     height: var(--logo-height);
 }
+@media screen and (max-width: 850px) {
+    #logo { position: revert; }
+    #logo svg {
+        position: sticky;
+        top: 0;
+    }
+}
 
 #sidebar, #content {
     /* Style for the sidebar and nav buttons */
@@ -119,7 +140,6 @@ body {
     background-color: var(--tab-color);
     box-sizing: border-box;
 }
-
 #sidebar::before {
     /* backdrop for logo when it slides out of header */
     background-color: var(--tab-color);
@@ -133,6 +153,11 @@ body {
     left: -2px;
     border-bottom: none;
 }
+@media screen and (max-width: 850px) {
+    /* Reduced margins layout for large phones, tablets */
+    #sidebar { border-right: none; }
+}
+
 
 #sidebar {
     /* Fake fixed position without ruining flex */
