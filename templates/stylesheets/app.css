@@ -24,6 +24,10 @@ a {
 a:hover { text-decoration: revert; }
 
 body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 20px;
     margin: 0;
     
     font-family: Besley;
@@ -36,20 +40,32 @@ body {
     
     --sidebar-width: max(18vw, 200px);
     --content-width: max(50vw, 600px);
+    
+    
+    /* Logo size is constrained in two dimensions. We'll need to know its height
+    to correctly place it as a """sticky""" element, so it's easiest to just
+    calculate the size here and re-use later. */
+    --logo-height: min(
+        calc( var(--banner-expansion) - 1vh ),
+        calc( var(--sidebar-width) / 1.445 )
+    );
 }
 @media screen and (max-width: 850px) {
     /* Reduced margins layout for large phones, tablets */
     body {
+        column-gap: 0;
+        
         --banner-collapsed-height: 0px;
         
-        --sidebar-width: 30vw;
-        --content-width: 70vw;
+        --sidebar-width: 30%;
+        --content-width: 70%;
     }
 }
 
 
 #header-banner {
     position: sticky;
+    z-index: 1;
     top: calc(-1 * var(--banner-expansion));
     width: 100%;
     height: calc(
@@ -64,39 +80,15 @@ body {
     /* Background image is set dynamically in the template file */
     background-position: center;
     background-size: cover;
-    
-    /* Ensure above sidebar::before */
-    z-index: 1;
 }
 
-#page-container {
-    /* A big container for everything not in the header. */
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 10px;
-}
-@media screen and (max-width: 850px) {
-    /* Reduced margins layout for large phones, tablets */
-    #page-container { gap: 0; }
-}
-
-#sidebar-container {
-    /* Logo size is constrained in two dimensions. We'll need to know its height
-    to correctly place it as a """sticky""" element, so it's easiest to just
-    calculate the size here and re-use later. */
-    --logo-height: min(
-        calc( var(--banner-expansion) - 1vh ),
-        calc( var(--sidebar-width) / 1.445 )
-    );
-}
 
 #logo {
     position: fixed;
-    z-index: 1;
+    z-index: 2;
+    
     display: flex;
     justify-content: center;
-    width: var(--sidebar-width);
     
     --start: calc(
         var(--banner-collapsed-height)/2 +
@@ -111,12 +103,16 @@ body {
         min(
             var(--scroll-position-num, 0),
             var(--banner-expansion-num)
-        )
-        / var(--banner-expansion-num)
+        ) /
+        var(--banner-expansion-num)
     );
     --weightStart: calc(
         1 - var(--weightEnd)
     );
+
+
+    width: var(--sidebar-width);
+    margin-right: calc(var(--content-width) + 20px);
     top: calc(
         var(--start) * var(--weightStart) +
         var(--end) * var(--weightEnd)
@@ -126,7 +122,7 @@ body {
     height: var(--logo-height);
 }
 @media screen and (max-width: 850px) {
-    #logo { position: revert; }
+    #logo { margin-right: calc(var(--content-width)); }
     #logo svg {
         position: sticky;
         top: 0;
@@ -164,28 +160,29 @@ body {
     position: sticky;
     display: flex;
     flex-direction: column;
+    z-index: 0;
     
     top: calc(
         var(--banner-collapsed-height) +
         var(--logo-height)
     );
     width: var(--sidebar-width);
+    height: fit-content;
+    
     padding: 0;
     border-radius: 0 0 8px 8px;
 }
 
-#sidebar > * { border-top: 2px dotted var(--tab-border); }
-#sidebar p {
-    font-size: 18px;
-    padding: 10px;
-    margin: 20px 0 0 0;
+#sidebar-buttons,
+#sidebar-text {
+    border-top: 2px dotted var(--tab-border);
 }
 
 #sidebar-buttons {
     display: flex;
     flex-direction: column;
     
-    margin: 0;
+    margin-top: 20px;
     padding: 10px 0;
 }
 
@@ -200,6 +197,15 @@ body {
     padding-left: calc(10% + 20px);
 }
 #sidebar-buttons a:hover { background-color: #3d4b6a; }
+
+#sidebar-text {
+    font-size: 18px;
+    padding: 10px;
+    margin: 0;
+}
+
+
+
 
 #content {
     width: var(--content-width);

@@ -16,36 +16,36 @@
     </head>
     <body>
 
-        <div id="header-banner" class="{{ headers.randomHeaders[0].textStyle }}"> {% block headerText %}{% endblock %}
-            </div>
-            <div id="page-container">
-                <div
-                    id="sidebar-container">
-                    {# allows flex cross-axis shrink #}
-                    <a href="/" id="logo">
-                        {% include "../img/banner-logo.svg" %}
-                    </a>
-                    <div id="sidebar">
-                        <p>
-                            Weekly insights into spaceflight engineering news, interviews and discussions. Listen in for technical details,
-                            corrections from people in the know and "one step deeper" knowledge.
-                        </p>
-                        <nav id="sidebar-buttons" aria-label="Main Navigation">
-                            <a href="/subscribe">Subscribe</a>
-                            <a href="/store">Store</a>
-                            <a href="/support">Support</a>
-                            <a href="/about">About and Contact</a>
-                        </nav>
-                    </div>
-                </div>
-                <div id="content">
-                    {% block content %}
-                        {{ content | safe }}
-                    {% endblock %}
-                </div>
-            </div>
+        <a href="/" id="logo">
+            {% include "../img/banner-logo.svg" %}
+        </a>
+        
+        <div id="header-banner" class="{{ headers.randomHeaders[0].textStyle }}">
+            {% block headerText %}{% endblock %}
+        </div>
+        
+        <div id="sidebar">
+            <nav id="sidebar-buttons" aria-label="Main Navigation">
+                <a href="/subscribe">Subscribe</a>
+                <a href="/store">Store</a>
+                <a href="/support">Support</a>
+                <a href="/about">About and Contact</a>
+            </nav>
+            <p id="sidebar-text">
+                Weekly insights into spaceflight engineering news, interviews and discussions. Listen in for technical details,
+                corrections from people in the know and "one step deeper" knowledge.
+            </p>
+        </div>
+        
+        <div id="content">
+            {% block content %}
+                {{ content | safe }}
+            {% endblock %}
+        </div>
+        
         <div id="footer">
                 {% include "license.html" %}
         </div>
-        </body>
-    </html>
+        
+    </body>
+</html>
