@@ -41,7 +41,6 @@ body {
     --sidebar-width: max(18vw, 200px);
     --content-width: max(50vw, 600px);
     
-    
     /* Logo size is constrained in two dimensions. We'll need to know its height
     to correctly place it as a """sticky""" element, so it's easiest to just
     calculate the size here and re-use later. */
@@ -59,10 +58,20 @@ body {
         
         --sidebar-width: 30%;
         --content-width: 70%;
+        
+        /* Same as above, just need to re-calculate it. */
+        --logo-height: calc( var(--banner-expansion) - 1vh );
+    }
+}
+@media screen and (max-width: 650px) {
+    body {
+        --banner-collapsed-height: 8vh;
     }
 }
 
-
+/* ----------------------- *\
+   BANNER, LOGO, HAMBURGER
+\* ----------------------- */
 #header-banner {
     position: sticky;
     z-index: 1;
@@ -82,7 +91,6 @@ body {
     background-size: cover;
 }
 
-
 #logo {
     position: fixed;
     z-index: 2;
@@ -90,15 +98,6 @@ body {
     display: flex;
     justify-content: center;
     
-    --start: calc(
-        var(--banner-collapsed-height)/2 +
-        var(--banner-expansion)/2 -
-        var(--logo-height)/2
-    );
-    --end: calc(
-        var(--banner-collapsed-height) +
-        10px
-    );
     --weightEnd: calc(
         min(
             var(--scroll-position-num, 0),
@@ -109,65 +108,96 @@ body {
     --weightStart: calc(
         1 - var(--weightEnd)
     );
-
-
-    width: var(--sidebar-width);
-    margin-right: calc(var(--content-width) + 20px);
-    top: calc(
-        var(--start) * var(--weightStart) +
-        var(--end) * var(--weightEnd)
-    );
 }
-#logo svg {
-    height: var(--logo-height);
+
+@media screen and (min-width: 651px) {
+    /* Full-size and medium screens push the logo into the sidebar */
+    #hamburger { display: none; }
+    
+    #logo {
+        --start: calc(
+            var(--banner-collapsed-height)/2 +
+            var(--banner-expansion)/2 -
+            var(--logo-height)/2
+        );
+        --end: calc(
+            var(--banner-collapsed-height) +
+            10px
+        );
+        width: var(--sidebar-width);
+        margin-right: calc(var(--content-width) + 20px);
+        top: calc(
+            var(--start) * var(--weightStart) +
+            var(--end) * var(--weightEnd)
+        );
+    }
+    #logo svg {
+        height: var(--logo-height);
+    }
 }
-@media screen and (max-width: 850px) {
-    #logo { margin-right: calc(var(--content-width)); }
+@media screen and (min-width: 651px) and (max-width: 850px) {
+    /*
+    Medium screens have no gutter between content and sidebar, so the logo needs
+    to be repositioned horizontally
+    */
+    #logo {
+        margin-right: calc(var(--content-width));
+    }
     #logo svg {
         position: sticky;
         top: 0;
+        height: var(--logo-height);
+    }
+}
+@media screen and (max-width: 650px) {
+    /*
+    Small screens keep the logo in the banner and add a hamburger menu button
+    */
+    #hamburger {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: var(--banner-collapsed-height);
+        z-index: 3;
+    }
+    #hamburger svg {
+        width: calc(var(--banner-collapsed-height) - 1vh);
+        height: calc(var(--banner-collapsed-height) - 1vh);
+        margin-top: 0.5vh;
+        
+        color: #edd9b9;
+        filter: drop-shadow( 1px 1px red) drop-shadow( -1px -1px cyan);
+    }
+    
+    #logo { top: 0.5vh; }
+    #logo svg {
+        height: calc(
+            calc(
+                var(--banner-expansion) + var(--banner-collapsed-height) - 1vh
+            ) * var(--weightStart) +
+            calc(
+                var(--banner-collapsed-height) - 1vh
+            ) * var(--weightEnd)
+        );
     }
 }
 
-#sidebar, #content {
+/* ------- *\
+   SIDEBAR
+\* ------- */
+
+#sidebar {
     /* Style for the sidebar and nav buttons */
     border: 2px solid var(--tab-border);
-    border-top: none;
     background-color: var(--tab-color);
     box-sizing: border-box;
 }
-#sidebar::before {
-    /* backdrop for logo when it slides out of header */
-    background-color: var(--tab-color);
-    border: 2px solid var(--tab-border);
-    border-top: none;
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: var(--banner-expansion);
-    bottom: 100%;
-    left: -2px;
-    border-bottom: none;
-}
-@media screen and (max-width: 850px) {
-    /* Reduced margins layout for large phones, tablets */
-    #sidebar { border-right: none; }
-}
-
 
 #sidebar {
     /* Fake fixed position without ruining flex */
-    position: sticky;
     display: flex;
     flex-direction: column;
     z-index: 0;
-    
-    top: calc(
-        var(--banner-collapsed-height) +
-        var(--logo-height)
-    );
-    width: var(--sidebar-width);
-    height: fit-content;
     
     padding: 0;
     border-radius: 0 0 8px 8px;
@@ -203,15 +233,90 @@ body {
     padding: 10px;
     margin: 0;
 }
-
-
-
-
-#content {
-    width: var(--content-width);
-    border-bottom: none;
+@media screen and (min-width: 651px) {
+    /* Medium and large screens show sidebar at all times */
+    #sidebar {
+        border-top: none;
+        position: sticky;
+        top: calc(
+            var(--banner-collapsed-height) +
+            var(--logo-height)
+        );
+        width: var(--sidebar-width);
+        height: fit-content;
+    }
+    #sidebar::before {
+        /* backdrop for logo when it slides out of header */
+        background-color: var(--tab-color);
+        border: 2px solid var(--tab-border);
+        border-top: none;
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: var(--banner-expansion);
+        bottom: 100%;
+        left: -2px;
+        border-bottom: none;
+    }
+}
+@media screen and (min-width: 651px) and (max-width: 850px) {
+    /* Medium screens have reduced margins */
+    #sidebar {
+        border-right: none;
+    }
+}
+@media screen and (max-width: 650px) {
+    /* Mobile shows/hides sidebar as a menu sidebar */
+    #sidebar {
+        position: fixed;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 75%;
+        border-left: none;
+        border-radius: 0 8px 8px 0;
+        
+        transition: left 200ms ease-out;
+    }
+    #sidebar.collapsed {
+        left: -100%;
+    }
+    
+    #sidebar-buttons {
+        margin-top: var(--banner-collapsed-height);
+    }
 }
 
+
+/* ----------- *\
+   CONTENT BOX
+\* ----------- */
+#content {
+    border: 2px solid var(--tab-border);
+    border-top: none;
+    border-bottom: none;
+    
+    background-color: var(--tab-color);
+    box-sizing: border-box;
+}
+@media screen and (min-width: 651px) {
+    /* Medium and large screens */
+    #content { width: var(--content-width); }
+}
+@media screen and (min-width: 651px) and (max-width: 850px) {
+    /* Medium screens have reduced margins */
+}
+@media screen and (max-width: 650px) {
+    /* Mobile shows/hides sidebar as a menu sidebar */
+    #content { width: 95vw; }
+}
+
+
+
+/* ------ *\
+   FOOTER
+\* ------ */
 #footer {
     border-top: 3px solid var(--tab-border);
     

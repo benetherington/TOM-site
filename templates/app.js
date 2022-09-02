@@ -1,3 +1,6 @@
+/*--------------*\
+  Logo scrolling
+\*--------------*/
 let framePending;
 const setScrollProperties = () => {
     document.body.style.setProperty(
@@ -11,28 +14,21 @@ const setScrollOncePerFrame = () => {
     framePending = true;
     requestAnimationFrame(setScrollProperties);
 };
+document.addEventListener('DOMContentLoaded', () => {
+    setScrollProperties();
+    window.addEventListener('scroll', setScrollOncePerFrame);
+});
 
+/*----------*\
+  Pagination
+\*----------*/
 const paginationSlideLeft = () => {
     document.getElementById('pagination-container').scrollLeft -= 400;
 };
 const paginationSlideRight = () => {
     document.getElementById('pagination-container').scrollLeft += 400;
 };
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Logo scroll event
-    setScrollProperties();
-    window.addEventListener('scroll', setScrollOncePerFrame);
-
-    // Pagination scroll buttons
-    document
-        .querySelector('#pagination-bar .slide-left')
-        .addEventListener('click', paginationSlideLeft);
-    document
-        .querySelector('#pagination-bar .slide-right')
-        .addEventListener('click', paginationSlideRight);
-
-    // Focus current pagination page in the pagination bar
+const setInitialPaginationSlider = () => {
     const currentPageLeft = document
         .querySelector('a[aria-current="page"]')
         .getClientRects()[0].left;
@@ -56,4 +52,26 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(scrollTo);
         console.log(paginationContainer.scrollLeft);
     }, 40);
+};
+document.addEventListener('DOMContentLoaded', () => {
+    document
+        .querySelector('#pagination-bar .slide-left')
+        .addEventListener('click', paginationSlideLeft);
+
+    document
+        .querySelector('#pagination-bar .slide-right')
+        .addEventListener('click', paginationSlideRight);
+
+    setInitialPaginationSlider();
+});
+
+/*--------------*\
+  Mobile sidebar
+\*--------------*/
+const showSidebar = () => {
+    document.getElementById('sidebar').classList.toggle('collapsed');
+};
+document.addEventListener('DOMContentLoaded', () => {
+    // Menu hamburger
+    document.getElementById('hamburger').addEventListener('click', showSidebar);
 });

@@ -16,6 +16,10 @@
     </head>
     <body>
 
+        <div id="hamburger">
+            {% include "../icon/list.svg" %}
+        </div>
+        
         <a href="/" id="logo">
             {% include "../img/banner-logo.svg" %}
         </a>
@@ -24,7 +28,7 @@
             {% block headerText %}{% endblock %}
         </div>
         
-        <div id="sidebar">
+        <div id="sidebar" class="collapsed">
             <nav id="sidebar-buttons" aria-label="Main Navigation">
                 <a href="/subscribe">Subscribe</a>
                 <a href="/store">Store</a>
