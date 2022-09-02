@@ -155,17 +155,23 @@ body {
     */
     #hamburger {
         position: fixed;
-        left: 0;
-        top: 0;
-        height: var(--banner-collapsed-height);
         z-index: 3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        left: 1vh;
+        top: 1vh;
+        
+        border-radius: 5px;
+        backdrop-filter: blur(5px);
     }
     #hamburger svg {
         width: calc(var(--banner-collapsed-height) - 1vh);
         height: calc(var(--banner-collapsed-height) - 1vh);
-        margin-top: 0.5vh;
+        margin: -0.5vh;
         
-        color: #edd9b9;
+        color: #f7e4c5;
         filter: drop-shadow( 1px 1px red) drop-shadow( -1px -1px cyan);
     }
     
@@ -179,6 +185,7 @@ body {
                 var(--banner-collapsed-height) - 1vh
             ) * var(--weightEnd)
         );
+        max-width: 69vw;
     }
 }
 
