@@ -251,6 +251,9 @@ body {
         );
         width: var(--sidebar-width);
         height: fit-content;
+        
+        /* Attempt to prevent sidebar from intersecting with footer */
+        margin-bottom: 155px;
     }
     #sidebar::before {
         /* backdrop for logo when it slides out of header */
@@ -268,9 +271,7 @@ body {
 }
 @media screen and (min-width: 651px) and (max-width: 850px) {
     /* Medium screens have reduced margins */
-    #sidebar {
-        border-right: none;
-    }
+    #sidebar { border-right: none; }
 }
 @media screen and (max-width: 650px) {
     /* Mobile shows/hides sidebar as a menu sidebar */
@@ -280,7 +281,7 @@ body {
         top: 0;
         left: 0;
         height: 100%;
-        width: 75%;
+        width: min(90vw, 300px);
         border-left: none;
         border-radius: 0 8px 8px 0;
         
