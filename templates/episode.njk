@@ -25,7 +25,7 @@ permalink: '/show-notes/{{ episode.slug }}/index.html'
     <div id="attachments">
         {% for image in episode.attachments %}
             <div class="attachment">
-                <img src="{{ image.medium.url }}" alt=""></img>
+                <img src="{{ image.medium.url or image.full.url }}" alt=""></img>
                 <div class="caption">{{ image.caption }}</div>
             </div>
         {% endfor %}
