@@ -5,6 +5,10 @@ pagination:
     size: 1
 ---
 
+{% block script %}
+    <script src="/pagination.js"></script>
+{% endblock %}
+
 {% for episode in pagination.items[0] %}
     <div class="episode-card">
         <a class="episode-title" href={{ "/show-notes/" + episode.slug | url }}>

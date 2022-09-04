@@ -12,12 +12,20 @@ const shortDate = (date) =>
 
 // EXPORTS
 module.exports = function (eleventyConfig) {
-    // Passthroughs
+    // CSS, image Passthroughs
     eleventyConfig.addPassthroughCopy({'templates/stylesheets': 'stylesheets'});
     eleventyConfig.addPassthroughCopy({'templates/img': 'img'});
     eleventyConfig.addPassthroughCopy({'templates/icon': 'icon'});
     eleventyConfig.addPassthroughCopy({'templates/font': 'font'});
+
+    // JS passthroughs
     eleventyConfig.addPassthroughCopy({'templates/app.js': 'app.js'});
+    eleventyConfig.addPassthroughCopy({
+        'templates/pagination.js': 'pagination.js',
+    });
+    eleventyConfig.addPassthroughCopy({
+        'templates/masonry.pkgd.min.js': 'masonry.pkgd.min.js',
+    });
 
     // Filters
     eleventyConfig.addNunjucksFilter('fullTitle', fullTitle);

@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="/stylesheets/font.css"/>
         <link rel="stylesheet" href="/stylesheets/app.css"/> {% block css %}{% endblock %}
         <script src="/app.js"></script>
+        {% block script %}{% endblock %}
         <style>
             #header-banner {
                 background-image: url({% block headerUrl %} {{ headers.randomHeaders[0].url }} {% endblock%} );
