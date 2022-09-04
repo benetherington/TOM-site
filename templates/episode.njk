@@ -8,6 +8,10 @@ permalink: '/show-notes/{{ episode.slug }}/index.html'
 
 {% extends "app.njk" %}
 
+{% block script %}
+    <script src="/masonry.pkgd.min.js"></script>
+{% endblock %}
+
 {% block css %}
     <link rel="stylesheet" href="/stylesheets/episode.css"/>
 {% endblock %}
@@ -22,11 +26,20 @@ permalink: '/show-notes/{{ episode.slug }}/index.html'
 
 {% block content %}
     {{ episode | formatNotes | safe }}
-    <div id="attachments">
+    <div id="attachments" class="grid" data-masonry='{
+            "itemSelector": ".attachment",
+            "columnWidth": 400,
+            "isFitWidth": true
+        }'>
         {% for image in episode.attachments %}
-            <div class="attachment">
+            <div class=
+                "attachment
+                {%- if image.aspectRatio >= 1.5 %} aspect-wide
+                {%- elseif image.aspectRatio < 1.0 %} aspect-tall
+                {%- else %} aspect-normal{% endif %}"
+            >
                 <img src="{{ image.medium.url or image.full.url }}" alt=""></img>
-                <div class="caption">{{ image.caption }}</div>
+                <div class="caption">{{ image.aspectRatio }} || {{ image.caption }}</div>
             </div>
         {% endfor %}
     </div>

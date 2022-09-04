@@ -90,7 +90,9 @@ const formatAttachment = ({id, attributes}) => {
         width: resource.width,
         height: resource.height,
     };
-    const attachment = {id, caption, attribution, full};
+    const aspectRatio =
+        Math.trunc((resource.width / resource.height) * 100) / 100;
+    const attachment = {id, caption, attribution, full, aspectRatio};
 
     if (resource.formats) {
         const formats = Object.entries(resource.formats);
