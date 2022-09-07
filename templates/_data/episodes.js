@@ -111,6 +111,17 @@ const formatAttachment = ({id, attributes}) => {
 const formatEpisode = ({id, attributes}) => {
     const {ep_num, publishedAt, title, slug, description, show_notes} =
         attributes;
+
+    const complete = [
+        ep_num,
+        publishedAt,
+        title,
+        slug,
+        description,
+        show_notes,
+    ].every((e) => e);
+    if (!complete) return;
+
     const audio = {};
     const topics = [];
     const attachments = attributes.attachments.data.map(formatAttachment);
@@ -157,5 +168,5 @@ module.exports = async () => {
         else doneFetching = true;
     }
 
-    return episodes;
+    return episodes.filter((e) => e);
 };
