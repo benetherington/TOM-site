@@ -16,8 +16,8 @@ permalink: '/show-notes/{{ episode.slug }}/index.html'
     <link rel="stylesheet" href="/stylesheets/episode.css"/>
 {% endblock %}
 
-{% block headerUrl %}
-    {{ episode.attachments[0].full.url }}
+{% block headerStyle %}
+        {{ episode.attachments[0].full.url | headerImageStyle}}
 {% endblock %}
 
 {% block headerText %}

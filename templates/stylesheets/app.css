@@ -89,7 +89,27 @@ body {
     /* Background image is set dynamically in the template file */
     background-position: center;
     background-size: cover;
+    
+    /* Fallback gradient */
+    --twinkle: transparent;
+    animation-name: twinkle;
+    animation-iteration-count: infinite;
+    background-image:
+        radial-gradient(2px   at 88% 27%, rgba(247, 189, 175, 90), transparent),
+        radial-gradient(1px   at 98% 17%, rgba(247, 220, 176, 90), transparent),
+        radial-gradient(2px   at 97% 38%, rgba(177, 184, 241, 90), transparent),
+        radial-gradient(1px   at 71% 18%, rgba(245, 217, 187, 90), transparent),
+        radial-gradient(1.5px at 96% 32%, rgba(246, 227, 187, 90), transparent),
+        radial-gradient(2px   at 96% 95%, rgba(251, 219, 175, 90), transparent),
+        linear-gradient(192deg, rgb(0 0 21), rgb(0 0 112))
 }
+
+
+/* 
+
+[8.460, 9.660, 7.530, 7.720, 7.890, 10.20, 7.310, 10.50, 13.70, 10.50,]
+
+*/
 
 #logo {
     position: fixed;

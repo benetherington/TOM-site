@@ -9,6 +9,8 @@ const wrapTitle = (attributes) =>
 const formatNotes = (attributes) => md.render(attributes.show_notes);
 const shortDate = (date) =>
     new Date(date).toLocaleDateString('default', {dateStyle: 'long'});
+const headerImageStyle = (url) =>
+    url ? `#header-banner {background-image: url(${url});}` : null;
 
 // EXPORTS
 module.exports = function (eleventyConfig) {
@@ -32,8 +34,9 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addNunjucksFilter('wrapTitle', wrapTitle);
     eleventyConfig.addNunjucksFilter('formatNotes', formatNotes);
     eleventyConfig.addNunjucksFilter('shortDate', shortDate);
+    eleventyConfig.addNunjucksFilter('headerImageStyle', headerImageStyle);
 
-    // Pptions
+    // Options
     return {
         dir: {
             input: 'templates',

@@ -1,6 +1,7 @@
 *.code-workspace
 /public/**
 .vscode/**
+*.ai
 
 ############################
 # OS X
@@ -116,4 +117,3 @@ exports
 *.cache
 build
 .strapi-updater.json
-

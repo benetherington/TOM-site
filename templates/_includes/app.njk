@@ -5,14 +5,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/stylesheets/index.css"/>
         <link rel="stylesheet" href="/stylesheets/font.css"/>
-        <link rel="stylesheet" href="/stylesheets/app.css"/> {% block css %}{% endblock %}
+        <link rel="stylesheet" href="/stylesheets/app.css"/>
+        {% block css %}{% endblock %}
+        <style>
+            {% block headerStyle %}
+                {{ headers.randomHeaders[0].url | headerImageStyle}}
+            {% endblock %}
+        </style>
         <script src="/app.js"></script>
         {% block script %}{% endblock %}
-        <style>
-            #header-banner {
-                background-image: url({% block headerUrl %} {{ headers.randomHeaders[0].url }} {% endblock%} );
-            }
-        </style>
         <title>{{ textDefaults.siteTitle }}</title>
     </head>
     <body>
@@ -25,7 +26,10 @@
             {% include "../img/banner-logo.svg" %}
         </a>
         
-        <div id="header-banner" class="{{ headers.randomHeaders[0].textStyle }}">
+        <div
+            id="header-banner"
+            class="{{ headers.randomHeaders[0].textStyle }}"
+        >
             {% block headerText %}{% endblock %}
         </div>
         
