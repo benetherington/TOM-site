@@ -347,6 +347,7 @@ body {
 \* ------ */
 #footer {
     border-top: 3px solid var(--tab-border);
+    width: 100%;
     
     display: flex;
     align-items: center;
