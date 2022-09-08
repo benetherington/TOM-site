@@ -3,6 +3,7 @@ layout: app.njk
 pagination:
     data: episodesChunked
     size: 1
+permalink: "{% if pagination.pageNumber > 0 %}jump-{{ pagination.items[0][pagination.items[0].length-1].ep_num }}/{% endif %}index.html"
 ---
 
 {% block script %}
@@ -42,7 +43,7 @@ pagination:
     <nav id="pagination-slider" aria-label="episode pagination">
         {% for pageEntry in pagination.pages | reverse %}
             <a
-                href="/{{ loop.revindex0 or '' }}"
+                href="/jump-{{ pageEntry[pageEntry.length-1].ep_num }}"
                 {% if loop.revindex0 == pagination.pageNumber %} aria-current="page" {% endif %}
                 draggable="false"
             >
