@@ -50,7 +50,7 @@
 /* ---------- *\
    PAGINATION
 \* ---------- */
-/* Surrounding elements */
+/* Container and label */
 #pagination-label {
     font-family: Prompt;
     font-weight: 200;
@@ -69,6 +69,7 @@
     display:flex;
 }
 
+/* Slide control buttons */
 #pagination-bar button {
     background-color: var(--button-tab-color);
     color: var(--tab-border);
@@ -85,23 +86,25 @@
 #pagination-bar .slide-left { border-left: none; }
 #pagination-bar .slide-right { border-right: none; }
 
-#pagination-bar button:hover {
+#pagination-bar button:not(.disabled):hover {
     background-color: var(--tab-border);
     color: var(--button-tab-color);
 }
 
-/* Containing elements */
-#pagination-container {
-    overflow: hidden;
-    scroll-behavior: smooth;
+#pagination-bar button.disabled {
+    pointer-events: none;
+    filter: saturate(0.8) contrast(0.8);
 }
 
-#pagination-container nav {
+/* Sliding page number container */
+#pagination-slider {
     display: flex;
+    overflow: hidden;
+    overscroll-behavior-x: contain;
 }
 
 /* Page numbers */
-#pagination-container a {
+#pagination-bar a {
     font-family: prompt;
     font-weight: 200;
     text-decoration-thickness: 1px;
@@ -114,7 +117,7 @@
     box-shadow: inset 7px 0px 7px -7px #000000cf;
 }
 
-#pagination-container a[aria-current='page'] {
+#pagination-bar a[aria-current='page'] {
     background-color: var(--default-text);
     color: var(--tab-color);
     pointer-events: none;
