@@ -10,6 +10,7 @@ permalink: '/show-notes/{{ episode.slug }}/index.html'
 
 {% block script %}
     <script src="/masonry.pkgd.min.js"></script>
+    <script src="/episode.js"></script>
 {% endblock %}
 
 {% block css %}
@@ -26,11 +27,7 @@ permalink: '/show-notes/{{ episode.slug }}/index.html'
 
 {% block content %}
     {{ episode | formatNotes | safe }}
-    <div id="attachments" class="grid" data-masonry='{
-            "itemSelector": ".attachment",
-            "columnWidth": 400,
-            "isFitWidth": true
-        }'>
+    <div id="attachments" class="grid">
         {% for image in episode.attachments %}
             <div class=
                 "attachment

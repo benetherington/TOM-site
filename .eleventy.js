@@ -28,6 +28,9 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy({
         'templates/masonry.pkgd.min.js': 'masonry.pkgd.min.js',
     });
+    eleventyConfig.addPassthroughCopy({
+        'templates/episode.js': 'episode.js',
+    });
 
     // Filters
     eleventyConfig.addNunjucksFilter('fullTitle', fullTitle);
