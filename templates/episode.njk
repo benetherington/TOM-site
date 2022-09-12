@@ -35,7 +35,7 @@ permalink: '/show-notes/{{ episode.slug }}/index.html'
                 {%- elseif image.aspectRatio < 1.0 %} aspect-tall
                 {%- else %} aspect-normal{% endif %}"
             >
-                <img src="{{ image.medium.url or image.full.url }}" alt=""></img>
+                <div class="image" style="background-image: url({{ image.medium.url or image.full.url }});" alt=""></div>
                 <div class="caption">{{ image.aspectRatio }} || {{ image.caption }}</div>
             </div>
         {% endfor %}
