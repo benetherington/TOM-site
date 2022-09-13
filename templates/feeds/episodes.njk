@@ -1,0 +1,76 @@
+---json
+{
+    "permalink": "episodes.xml",
+    "eleventyExcludeFromCollections": true,
+    "date": "Last Modified",
+    "metadata": {
+        "title": "The Orbital Mechanics Podcast",
+        "link": "https://theorbitalmechanics.com",
+        "author": {
+            "name": "David Fourman, Ben Etherington, and Dennis Just",
+            "email": "info@theorbitalmechanics.com",
+        "description": "Every week we cover the latest spaceflight news, discuss past, current and future exploration efforts, and take a look at upcoming events. Tune in to hear about how humans get to space, how they stay in space and how unmanned craft reach farther and farther into the universe around us.",
+        "image": ""
+    }
+  }
+}
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+    xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+    xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>{{ metadata.title }}</title>
+        <itunes:title>{{ metadata.title }}</itunes:title>
+
+        <pubDate>{{ builtAt }}</pubDate>
+        <lastBuildDate>{{ builtAt }}</lastBuildDate>
+        <language>en-US</language>
+        <link>{{ metadata.link | url }}</link>
+
+        <itunes:author>{{ metadata.author.name }}</itunes:author>
+        <itunes:owner>
+            <itunes:email>{{ metadata.author.email }}</itunes:email>
+            <itunes:name>{{ metadata.author.name }}</itunes:name>
+        </itunes:owner>
+        <copyright>
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+        </copyright>
+
+        <description>{{ metadata.description }}</description>
+        <!-- <itunes:image href={{ metadata.image }}/> -->
+        <itunes:category text="Science">
+            <itunes:category text="Natural Sciences"/>
+        </itunes:category>
+        <itunes:category text="News">
+            <itunes:category text="Tech News"/>
+        </itunes:category>
+        <itunes:explicit>false</itunes:explicit>
+        <itunes:type>episodic</itunes:type>
+
+    {%- for episode in episodes %}
+        <item>
+            <title>{{ episode | fullTitle }}</title>
+            <itunes:title>{{ episode | fullTitle }}</itunes:title>
+            <itunes:episode>{{ episode.ep_num }}</itunes:episode>
+            <category></category>
+            <pubDate>{{ episode.publishedAt }}</pubDate>
+            <link>{{ episode.slug | absoluteSlug }}</link>
+            <guid></guid>
+
+            <description>{{ episode.description }}</description>
+            <itunes:summary>{{ episode.description }}</itunes:summary>
+            <itunes:subtitle>{{ episode.description }}</itunes:subtitle>
+            <content:encoded>
+                <![CDATA[{{ episode.show_notes | formatRssNotes | safe }}]]>
+            </content:encoded>
+
+            <itunes:image>{{ episode.attachments[0].thumbnail.url }}</itunes:image>
+            <itunes:explicit>false</itunes:explicit>
+
+            <itunes:duration>length_in_seconds</itunes:duration>
+            <enclosure url="" length="length_in_bytes" type="audio/mpeg" />
+        </item>
+    {%- endfor %}
+    </channel>
+</rss>
