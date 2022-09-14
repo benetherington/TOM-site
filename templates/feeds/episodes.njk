@@ -23,10 +23,10 @@
         <title>{{ metadata.title }}</title>
         <itunes:title>{{ metadata.title }}</itunes:title>
 
-        <pubDate>{{ builtAt }}</pubDate>
+        <pubDate>{{ episodes[0].publishedAt | rfcDate }}</pubDate>
         <lastBuildDate>{{ builtAt }}</lastBuildDate>
         <language>en-US</language>
-        <link>{{ metadata.link | url }}</link>
+        <link>{{ metadata.link }}</link>
 
         <itunes:author>{{ metadata.author.name }}</itunes:author>
         <itunes:owner>
@@ -54,7 +54,7 @@
             <itunes:title>{{ episode | fullTitle }}</itunes:title>
             <itunes:episode>{{ episode.ep_num }}</itunes:episode>
             <category></category>
-            <pubDate>{{ episode.publishedAt }}</pubDate>
+            <pubDate>{{ episode.publishedAt | rfcDate }}</pubDate>
             <link>{{ episode.slug | absoluteSlug }}</link>
             <guid></guid>
 

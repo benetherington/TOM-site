@@ -1,24 +1,18 @@
-// FILTERS
+/*-------*\
+  FILTERS
+\*-------*/
+// Episode attributes
 const fullTitle = (attributes) =>
     `Episode ${attributes.ep_num}: ${attributes.title}`;
 const wrapTitle = (attributes) =>
     `Episode ${attributes.ep_num}:<br>${attributes.title}`;
-const shortDate = (date) =>
-    new Date(date).toLocaleDateString('default', {dateStyle: 'long'});
 const headerImageStyle = (url) =>
     url ? `#header-banner {background-image: url(${url});}` : null;
 
-const websiteMarkdown = new require('markdown-it')();
-const formatNotes = (attributes) =>
-    websiteMarkdown.render(attributes.show_notes);
-
-const rssMarkdown = new require('markdown-it')('zero').enable([
-    'link',
-    'paragraph',
-    'list',
-]);
-const formatRssNotes = (show_notes) =>
-    rssMarkdown.render(show_notes).replace(/\n/g, '');
+// Date formats
+const shortDate = (date) =>
+    new Date(date).toLocaleDateString('default', {dateStyle: 'long'});
+const rfcDate = (date) => new Date(date).toUTCString();
 
 // Base URL for absolute links
 const isDev = process.env.ELEVENTY_ENV === 'development';
@@ -26,6 +20,23 @@ const baseUrl = isDev
     ? `localhost:8080`
     : `https://www.theorbitalmechanics.com/`;
 const absoluteSlug = (url) => new URL(`/show-notes/${url}`, baseUrl).href;
+
+/*---------*\
+  RENDERERS
+\*---------*/
+// MD for episode pages
+const websiteMarkdown = new require('markdown-it')();
+const formatNotes = (attributes) =>
+    websiteMarkdown.render(attributes.show_notes);
+
+// Simplified MD for RSS feed
+const rssMarkdown = new require('markdown-it')('zero').enable([
+    'link',
+    'paragraph',
+    'list',
+]);
+const formatRssNotes = (show_notes) =>
+    rssMarkdown.render(show_notes).replace(/\n/g, '');
 
 // CONFIGURE ELEVENTY
 module.exports = function (eleventyConfig) {
@@ -60,6 +71,7 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addNunjucksFilter('formatNotes', formatNotes);
     eleventyConfig.addNunjucksFilter('formatRssNotes', formatRssNotes);
     eleventyConfig.addNunjucksFilter('shortDate', shortDate);
+    eleventyConfig.addNunjucksFilter('rfcDate', rfcDate);
     eleventyConfig.addNunjucksFilter('headerImageStyle', headerImageStyle);
     eleventyConfig.addNunjucksFilter('absoluteSlug', absoluteSlug);
 
