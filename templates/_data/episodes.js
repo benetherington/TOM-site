@@ -8,6 +8,24 @@ A typical API response.json().data looks like:
         id: 123,
         attributes: {
             title, slug, show_notes, etc...
+            audio: {
+                name: 'audio.mp3',
+                alternativeText: null,
+                caption: null,
+                width: null,
+                height: null,
+                formats: null,
+                hash: 'audio_23f30d2d41',
+                ext: '.mp3',
+                mime: 'audio/mpeg',
+                size: 72036.17,
+                url: '/uploads/audio_23f30d2d41.mp3',
+                previewUrl: null,
+                provider: 'local',
+                provider_metadata: null,
+                createdAt: '2022-09-14T14:09:51.139Z',
+                updatedAt: '2022-09-14T14:09:51.139Z'
+            },
             topics: [],
             attachments: {
                 data: [{
@@ -44,7 +62,11 @@ A typical return value from this function looks like:
     {
         id:123, ep_num: 123,
         publishedAt, title, slug, description, show_notes,
-        audio: {},
+        audio: {
+            mime: 'audio/mpeg',
+            size: 72036.17,
+            url: '/uploads/audio_23f30d2d41.mp3',
+},
         topics: [],
         attachments: [
             {
@@ -73,6 +95,9 @@ const query = (page) =>
                         attribution: true,
                         resource: '*',
                     },
+                },
+                audio: {
+                    populate: ['*'],
                 },
             },
             sort: ['ep_num:desc'],
@@ -108,6 +133,14 @@ const formatAttachment = ({id, attributes}) => {
     return attachment;
 };
 
+const formatAudio = (data) => {
+    return {
+        mime: data.attributes.mime,
+        size: data.attributes.size,
+        url: data.attributes.url,
+    };
+};
+
 const formatEpisode = ({id, attributes}) => {
     const {ep_num, publishedAt, title, slug, description, show_notes} =
         attributes;
@@ -122,7 +155,7 @@ const formatEpisode = ({id, attributes}) => {
     ].every((e) => e);
     if (!complete) return;
 
-    const audio = {};
+    const audio = formatAudio(attributes.audio.data);
     const topics = [];
     const attachments = attributes.attachments.data.map(formatAttachment);
     return {

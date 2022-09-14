@@ -69,7 +69,11 @@
             <itunes:explicit>false</itunes:explicit>
 
             <itunes:duration>length_in_seconds</itunes:duration>
-            <enclosure url="" length="length_in_bytes" type="audio/mpeg" />
+            <enclosure
+                url={{ episode.audio.url | absolutePath }}
+                length={{ episode.audio.size }}
+                type={{ episode.audio.mime }}
+            />
         </item>
     {%- endfor %}
     </channel>

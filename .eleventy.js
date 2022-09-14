@@ -19,7 +19,8 @@ const isDev = process.env.ELEVENTY_ENV === 'development';
 const baseUrl = isDev
     ? `localhost:8080`
     : `https://www.theorbitalmechanics.com/`;
-const absoluteSlug = (url) => new URL(`/show-notes/${url}`, baseUrl).href;
+const absoluteSlug = (slug) => new URL(`/show-notes/${slug}`, baseUrl).href;
+const absolutePath = (path) => new URL(path, baseUrl).href;
 
 /*---------*\
   RENDERERS
@@ -74,6 +75,7 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addNunjucksFilter('rfcDate', rfcDate);
     eleventyConfig.addNunjucksFilter('headerImageStyle', headerImageStyle);
     eleventyConfig.addNunjucksFilter('absoluteSlug', absoluteSlug);
+    eleventyConfig.addNunjucksFilter('absolutePath', absolutePath);
 
     eleventyConfig.ignores.add('templates/episode.njk');
     eleventyConfig.ignores.add('templates/index.njk');
