@@ -7,6 +7,25 @@ const headers = {
     'Content-Type': 'application/json',
 };
 
+const getAudioDuration = async (audioId) => {
+    // Use the upload API to access the file before it is associated with the episode.
+    const {host, port} = strapi.config;
+    const infoResponse = await fetch(
+        `http://${host}:${port}/api/upload/files/${audioId}`,
+        {headers},
+    );
+    const audioInfo = await infoResponse.json();
+
+    // Fetch audio file
+    const fileResponse = await fetch(`http://${host}:${port}${audioInfo.url}`);
+    const audioBuffer = await fileResponse.buffer();
+
+    // Parse metadata
+    const {parseBuffer} = await import('music-metadata');
+    const parsed = await parseBuffer(audioBuffer);
+    return Math.round(parsed.format.duration);
+};
+
 const updateDuration = async (event) => {
     const {data, where} = event.params;
 
@@ -19,25 +38,8 @@ const updateDuration = async (event) => {
         return;
     }
 
-    // Fetch audio info
-    // Use the upload API to access the file before it is associated with the episode.
-    const {host, port} = strapi.config;
-    const infoResponse = await fetch(
-        `http://${host}:${port}/api/upload/files/${data.audio}`,
-        {headers},
-    );
-    const audioInfo = await infoResponse.json();
-
-    // Fetch audio file
-    const fileResponse = await fetch(`http://${host}:${port}${audioInfo.url}`);
-    const audioBuffer = await fileResponse.buffer();
-
-    // Parse metadata
-    const {parseBuffer} = await import('music-metadata');
-    const parsed = await parseBuffer(audioBuffer);
-
     // Edit episode data
-    data.audio_duration_sec = Math.round(parsed.format.duration);
+    data.audio_duration_sec = await getAudioDuration(data.audio);
 };
 
 module.exports = {
