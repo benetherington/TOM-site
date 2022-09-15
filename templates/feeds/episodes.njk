@@ -18,7 +18,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"
     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
-    xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    xmlns:content="http://purl.org/rss/1.0/modules/content/"
+    xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>{{ metadata.title }}</title>
         <itunes:title>{{ metadata.title }}</itunes:title>
@@ -27,6 +28,7 @@
         <lastBuildDate>{{ builtAt }}</lastBuildDate>
         <language>en-US</language>
         <link>{{ metadata.link }}</link>
+        <atom:link href="{{ metadata.link }}" rel="self" type="application/rss+xml" />
 
         <itunes:author>{{ metadata.author.name }}</itunes:author>
         <itunes:owner>
@@ -39,6 +41,7 @@
 
         <description>{{ metadata.description }}</description>
         <!-- <itunes:image href={{ metadata.image }}/> -->
+        <category>Science and Engineering/Space/Spaceflight</category>
         <itunes:category text="Science">
             <itunes:category text="Natural Sciences"/>
         </itunes:category>
@@ -53,10 +56,9 @@
             <title>{{ episode | fullTitle }}</title>
             <itunes:title>{{ episode | fullTitle }}</itunes:title>
             <itunes:episode>{{ episode.ep_num }}</itunes:episode>
-            <category></category>
             <pubDate>{{ episode.publishedAt | rfcDate }}</pubDate>
             <link>{{ episode.slug | absoluteSlug }}</link>
-            <guid></guid>
+            <guid>{{ episode.slug | absoluteSlug }}</guid>
 
             <description>{{ episode.description }}</description>
             <itunes:summary>{{ episode.description }}</itunes:summary>
@@ -65,14 +67,14 @@
                 <![CDATA[{{ episode.show_notes | formatRssNotes | safe }}]]>
             </content:encoded>
 
-            <itunes:image>{{ episode.attachments[0].thumbnail.url }}</itunes:image>
+            <itunes:image href="{{ episode.attachments[0].thumbnail.url | absolutePath }}" />
             <itunes:explicit>false</itunes:explicit>
 
-            <itunes:duration>length_in_seconds</itunes:duration>
+            <itunes:duration>{{ episode.audio_duration_sec }}</itunes:duration>
             <enclosure
-                url={{ episode.audio.url | absolutePath }}
-                length={{ episode.audio.size }}
-                type={{ episode.audio.mime }}
+                url="{{ episode.audio.url | absolutePath }}"
+                length="{{ episode.audio.size | round }}"
+                type="{{ episode.audio.mime }}"
             />
         </item>
     {%- endfor %}

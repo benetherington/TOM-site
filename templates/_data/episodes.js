@@ -61,7 +61,7 @@ A typical return value from this function looks like:
 [
     {
         id:123, ep_num: 123,
-        publishedAt, title, slug, description, show_notes,
+        publishedAt, title, slug, description, show_notes, audio_duration_sec
         audio: {
             mime: 'audio/mpeg',
             size: 72036.17,
@@ -142,8 +142,15 @@ const formatAudio = (data) => {
 };
 
 const formatEpisode = ({id, attributes}) => {
-    const {ep_num, publishedAt, title, slug, description, show_notes} =
-        attributes;
+    const {
+        ep_num,
+        publishedAt,
+        title,
+        slug,
+        description,
+        show_notes,
+        audio_duration_sec,
+    } = attributes;
 
     const complete = [
         ep_num,
@@ -152,6 +159,7 @@ const formatEpisode = ({id, attributes}) => {
         slug,
         description,
         show_notes,
+        audio_duration_sec,
     ].every((e) => e);
     if (!complete) return;
 
@@ -166,6 +174,7 @@ const formatEpisode = ({id, attributes}) => {
         slug,
         description,
         show_notes,
+        audio_duration_sec,
         audio,
         topics,
         attachments,
