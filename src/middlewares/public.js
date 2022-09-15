@@ -1,34 +1,51 @@
-'use strict';
+const koaStatic = require('koa-static');
 
-/**
- * `public` middleware.
- */
+const notesDir = 'show-notes';
 
 module.exports = (config, {strapi}) => {
-    // Add your own logic here.
+    const serve = koaStatic(notesDir);
+
+    // SLUG
     strapi.server.router.get(
         'slug',
-        '/:slug([a-z0-9]+(?:-[a-z0-9]+)*)',
-        async (ctx) => {
-            // Determine if this is a slug or episode number
+        '/:slug([a-z]+(?:-[a-z0-9]+)*)',
+        async (ctx, next) => {
             const {slug} = ctx.params;
 
-            // Build filter to find this episode
-            let filters;
-            if (/^\d+$/.test(slug)) {
-                filters = {ep_num: slug};
-            } else {
-                filters = {slug: slug};
-            }
+            // Store original path, set "real" path
+            const oldPath = ctx.path;
+            const newPath = '/show-notes/' + slug;
+            ctx.path = newPath;
 
-            // Fetch episode
+            // Let Koa serve real file, let other middlwares do their thing
+            await serve(ctx, async () => {
+                ctx.path = oldPath;
+                await next();
+                ctx.path = newPath;
+            });
+        },
+    );
+
+    // EPISODE NUMBER
+    strapi.server.router.get(
+        'ep_num',
+        '/:ep_num([0-9]{1,4})',
+        async (ctx, next) => {
+            const {ep_num} = ctx.params;
+
+            // Look up slug
             const episodes = await strapi.entityService.findMany(
                 'api::episode.episode',
-                {filters, limit: 1},
+                {filters: {ep_num}, fields: 'slug'},
             );
+            if (!episodes.length) {
+                return ctx.redirect('/');
+            }
+            const episode = episodes[0];
 
-            // Return the page
-            ctx.body = episodes[0];
+            // Redirect to slug
+            const newPath = '/show-notes/' + episode.slug;
+            ctx.redirect(newPath);
         },
     );
 };

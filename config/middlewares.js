@@ -7,8 +7,12 @@ module.exports = [
     'strapi::query',
     'strapi::session',
     'strapi::favicon',
-    'strapi::public',
+
+    // Routing: only overwrite some routes
     'global::public',
+    'strapi::public',
+
+    // Overwrite upload limits
     {
         name: 'strapi::body',
         config: {
