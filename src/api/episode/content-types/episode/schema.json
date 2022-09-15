@@ -50,6 +50,9 @@
             "relation": "manyToMany",
             "target": "api::topic.topic",
             "inversedBy": "episodes"
+        },
+        "audio_duration_sec": {
+            "type": "biginteger"
         }
     }
 }
