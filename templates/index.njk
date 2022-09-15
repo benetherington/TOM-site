@@ -43,7 +43,11 @@ permalink: "{% if pagination.pageNumber > 0 %}jump-{{ pagination.items[0][pagina
     <nav id="pagination-slider" aria-label="episode pagination">
         {% for pageEntry in pagination.pages | reverse %}
             <a
-                href="/jump-{{ pageEntry[pageEntry.length-1].ep_num }}"
+                {% if loop.last %}
+                    href="/"
+                {% else %}
+                    href="/jump-{{ pageEntry[pageEntry.length-1].ep_num }}"
+                {% endif %}
                 {% if loop.revindex0 == pagination.pageNumber %} aria-current="page" {% endif %}
                 draggable="false"
             >

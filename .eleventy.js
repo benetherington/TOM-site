@@ -77,9 +77,6 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addNunjucksFilter('absoluteSlug', absoluteSlug);
     eleventyConfig.addNunjucksFilter('absolutePath', absolutePath);
 
-    eleventyConfig.ignores.add('templates/episode.njk');
-    eleventyConfig.ignores.add('templates/index.njk');
-
     // Options
     return {
         dir: {
