@@ -1,27 +1,22 @@
 /* COLORS */
 :root {
-    --secondary-extra-dark: #771c29;
+    /* --secondary-extra-dark: #771c29;
     --secondary-dark: #bc1141;
     --secondary-light: #e695a2;
-    --secondary-extra-light:#f59db4;
+    --secondary-extra-light: #f59db4;
     --primary-extra-dark: #0a3363;
     --primary-dark: #1b619f;
     --primary-light: #7bb3f2;
-    --primary-extra-light: #9bc7ee;
+    --primary-extra-light: #9bc7ee; */
     
-    --page-background: #1d273a;
-    --default-text: #b2bdc6;
+    --page-background: #101c31;
+    --default-text: #c5d3d7;
     
-    --tab-color: #2f3c57;
-    --tab-border: #6b747b;
-    --button-tab-color: #384468;
+    --tab-color: #293141;
+    --tab-border: #3d6d94;
+    --button-tab-color: #303852;
+    --button-tab-color-rgb: 48, 56, 82;
 }
-
-a {
-    text-decoration: none;
-    color: var(--default-text);
-}
-a:hover { text-decoration: revert; }
 
 body {
     display: flex;
@@ -68,6 +63,8 @@ body {
         --banner-collapsed-height: 8vh;
     }
 }
+
+a { color: var(--default-text); }
 
 /* ----------------------- *\
    BANNER, LOGO, HAMBURGER
@@ -242,6 +239,7 @@ body {
 #sidebar-buttons a {
     font-size: 25px;
     font-family: Prompt;
+    text-decoration: none;
     font-weight: 200;
     text-decoration-thickness: 1px;
     
@@ -249,7 +247,10 @@ body {
     text-indent: -10%;
     padding-left: calc(10% + 20px);
 }
-#sidebar-buttons a:hover { background-color: #3d4b6a; }
+#sidebar-buttons a:hover {
+    background-color: #3d4b6a;
+    text-decoration: revert;
+}
 
 #sidebar-text {
     font-size: 18px;

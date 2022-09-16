@@ -68,7 +68,7 @@ body {
     border: 2px solid var(--tab-border);
     border-radius: 4px;
     box-shadow: 1px 0 6px 1px rgb(0 0 0 / 43%);
-    background-color: var(--button-tab-color);
+    background-color: rgba(var(--button-tab-color-rgb), 0.95);
     color: var(--default-text);
 }
 
