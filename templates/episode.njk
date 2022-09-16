@@ -45,8 +45,17 @@ permalink: '/show-notes/{{ episode.slug }}/index.html'
                 {%- if image.aspectRatio >= 2.0 %} aspect-wide
                 {%- elseif image.aspectRatio < 0.7 %} aspect-tall
                 {%- else %} aspect-normal{% endif %}"
+                style = "
+                    --full-width: {{ image.full.width }}px;
+                    --full-height: {{ image.full.height }}px;
+                    --aspect-ratio: {{ image.aspectRatio }};
+                "
             >
-                <div class="image" style="background-image: url({{ image.medium.url or image.full.url }});" alt=""></div>
+                <div
+                    class="image"
+                    style="background-image: url({{ image.full.url }});"
+                    alt=""
+                ></div>
                 <div class="caption">{{ image.aspectRatio }}/{{ image.index }} || {{ image.caption }}</div>
             </div>
         {% endfor %}

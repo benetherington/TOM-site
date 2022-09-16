@@ -3,6 +3,10 @@ body {
     --content-width: max(70vw, 600px);
 }
 
+
+/* --------------- *\
+   Title in header
+\* --------------- */
 #header-banner.dark-text .header-title {
     color: #959595;
     text-shadow: 0 0 20px #959595;
@@ -20,10 +24,15 @@ body {
 }
 
 
-
+/* --------------- *\
+   Attached images
+\* --------------- */
+/* Masonry grid */
 #attachments {
     margin: 0 3%;
 }
+
+/* Image/caption container */
 .attachment {
     box-sizing: border-box;
     display: flex;
@@ -32,26 +41,38 @@ body {
     margin-bottom: 3%;
 }
 
-.attachment .image,
-.attachment .caption {
-    --border-width: 2px;
-    
-    border: var(--border-width) solid var(--tab-border);
-    background-color: var(--tab-color);
-}
-
+/* Image */
 .attachment .image {
-    width: calc(100%-5px);
+    width: calc(100% - 5px);
     flex-grow: 1;
     padding: 5px;
-    border-radius: 12px 12px 12px 0;
     
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    
+    box-shadow: 1px 2px 5px 0px rgba(0 0 0 / 50%);
 }
 
+/* Caption */
+.attachment .caption {
+    position: relative;
+    top: -27px;
+    align-self: center;
+    box-sizing: border-box;
+    
+    padding: 5px 15px;
+    max-width: 95%;
+    width: fit-content;
+    
+    border: 2px solid var(--tab-border);
+    border-radius: 4px;
+    box-shadow: 1px 0 6px 1px rgb(0 0 0 / 43%);
+    background-color: var(--button-tab-color);
+    color: var(--default-text);
+}
 
+/* Size variants for masonry layout */
 .attachment.aspect-tall {
     width: calc(20%);
     aspect-ratio: 1/2;
@@ -64,20 +85,12 @@ body {
     aspect-ratio: 2/1;
 }
 .attachment.expanded {
-    width: calc(100%);
-}
-
-
-.caption {
-    position: relative;
-    top: calc(-1 * var(--border-width));
-    box-sizing: border-box;
-    width: 95%;
-    padding: 5px;
+    /* TODO: small images are displayed larger than their full size, and so
+    shrink when expanded */
     
-    border-top: none;
-    border-radius: 0 0 12px 12px;
-    color: var(--default-text);
+    max-width: 100%;
+    width: var(--full-width);
+    aspect-ratio: var(--aspect-ratio);
 }
 
 
