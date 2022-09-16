@@ -104,13 +104,6 @@ body {
         linear-gradient(192deg, rgb(0 0 21), rgb(0 0 112))
 }
 
-
-/* 
-
-[8.460, 9.660, 7.530, 7.720, 7.890, 10.20, 7.310, 10.50, 13.70, 10.50,]
-
-*/
-
 #logo {
     position: fixed;
     z-index: 2;
@@ -129,6 +122,9 @@ body {
         1 - var(--weightEnd)
     );
 }
+
+#logo svg { filter: drop-shadow(0 0 15px var(--tab-color)) }
+
 
 @media screen and (min-width: 651px) {
     /* Full-size and medium screens push the logo into the sidebar */
