@@ -21,27 +21,16 @@ body {
 
 
 
-#attachments { margin: 0 auto; }
+#attachments {
+    margin: 0 3%;
+}
 .attachment {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     aspect-ratio: 1/1;
+    margin-bottom: 3%;
 }
-
-.attachment.aspect-tall {
-    width: 25%;
-}
-.attachment.aspect-normal {
-    width: 50%;
-}
-.attachment.aspect-wide {
-    width: 100%;
-}
-.attachment.expanded {
-    width: 100%;
-}
-
 
 .attachment .image,
 .attachment .caption {
@@ -51,16 +40,33 @@ body {
     background-color: var(--tab-color);
 }
 
-
 .attachment .image {
-    width: 100%;
-    flex-basis: 75%;
+    width: calc(100%-5px);
+    flex-grow: 1;
     padding: 5px;
     border-radius: 12px 12px 12px 0;
     
-    background-position: cover;
+    background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
 }
+
+
+.attachment.aspect-tall {
+    width: calc(20%);
+    aspect-ratio: 1/2;
+}
+.attachment.aspect-normal {
+    width: calc(40%);
+}
+.attachment.aspect-wide {
+    width: calc(60%);
+    aspect-ratio: 2/1;
+}
+.attachment.expanded {
+    width: calc(100%);
+}
+
 
 .caption {
     position: relative;

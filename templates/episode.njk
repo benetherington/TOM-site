@@ -27,17 +27,31 @@ permalink: '/show-notes/{{ episode.slug }}/index.html'
 
 {% block content %}
     {{ episode | formatNotes | safe }}
-    <div id="attachments" class="grid">
+    <div
+        id="attachments"
+        class="grid"
+        data-masonry='{
+            "itemSelector": ".attachment",
+            "columnWidth": ".column-sizer",
+            "initLayout": false,
+            "percentPosition": true,
+            "gutter": ".gutter-sizer",
+            "transitionDuration": 0
+        }'
+    >
         {% for image in episode.attachments %}
             <div class=
                 "attachment
-                {%- if image.aspectRatio >= 1.5 %} aspect-wide
-                {%- elseif image.aspectRatio < 1.0 %} aspect-tall
+                {%- if image.aspectRatio >= 2.0 %} aspect-wide
+                {%- elseif image.aspectRatio < 0.7 %} aspect-tall
                 {%- else %} aspect-normal{% endif %}"
             >
                 <div class="image" style="background-image: url({{ image.medium.url or image.full.url }});" alt=""></div>
-                <div class="caption">{{ image.aspectRatio }} || {{ image.caption }}</div>
+                <div class="caption">{{ image.aspectRatio }}/{{ image.index }} || {{ image.caption }}</div>
             </div>
         {% endfor %}
+        {# Add empty tall element for Maonry to size off of #}
+        <div class="column-sizer" style="width: 20%"></div>
+        <div class="gutter-sizer" style="width: 3%"></div>
     </div>
 {% endblock %}

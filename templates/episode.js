@@ -14,14 +14,7 @@ const addEventListeners = () => {
 };
 
 window.addEventListener('load', () => {
-    masonry = new Masonry('#attachments', {
-        itemSelector: '.attachment',
-        columnWidth: '.aspect-tall',
-        initLayout: false,
-        percentPosition: true,
-        gutter: 2,
-        transitionDuration: 0,
-    });
+    masonry = Masonry.data(document.getElementById('attachments'));
     addEventListeners();
     masonry.layout();
 });
