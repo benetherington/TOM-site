@@ -34,11 +34,18 @@ body {
 
 /* Image/caption container */
 .attachment {
+    z-index: 0;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     aspect-ratio: 1/1;
-    margin-bottom: 3%;
+    max-width: var(--full-width);
+    
+    transition:
+        width 200ms ease,
+        aspect-ratio 200ms ease,
+        left 200ms ease,
+        top 200ms ease;
 }
 
 /* Image */
@@ -57,18 +64,20 @@ body {
 /* Caption */
 .attachment .caption {
     position: relative;
-    top: -27px;
+    top: -20px;
     align-self: center;
     box-sizing: border-box;
     
-    padding: 5px 15px;
+    padding: 3px 7px;
     max-width: 95%;
     width: fit-content;
     
+    font-size: 14px;
     border: 2px solid var(--tab-border);
     border-radius: 4px;
     box-shadow: 1px 0 6px 1px rgb(0 0 0 / 43%);
-    background-color: rgba(var(--button-tab-color-rgb), 0.95);
+    background-color: #293141;
+    /* background-color: rgba(var(--button-tab-color-rgb), 0.95); */
     color: var(--default-text);
 }
 
@@ -85,12 +94,12 @@ body {
     aspect-ratio: 2/1;
 }
 .attachment.expanded {
-    /* TODO: small images are displayed larger than their full size, and so
-    shrink when expanded */
+    z-index: 1;
     
-    max-width: 100%;
-    width: var(--full-width);
-    aspect-ratio: var(--aspect-ratio);
+    /* TODO: eliminate animation bounce by directly setting height and width
+    instead of width and aspect ratio */
+    width: 100%;
+    aspect-ratio: calc(var(--aspect-ratio));
 }
 
 

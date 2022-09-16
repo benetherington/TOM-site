@@ -11,6 +11,9 @@ const addEventListeners = () => {
     attchs.forEach((attch) => {
         attch.addEventListener('click', resizeAttachment);
     });
+    document
+        .getElementById('attachments')
+        .addEventListener('transitionend', () => masonry.layout());
 };
 
 window.addEventListener('load', () => {

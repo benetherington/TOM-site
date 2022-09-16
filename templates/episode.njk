@@ -42,7 +42,7 @@ permalink: '/show-notes/{{ episode.slug }}/index.html'
         {% for image in episode.attachments %}
             <div class=
                 "attachment
-                {%- if image.aspectRatio >= 2.0 %} aspect-wide
+                {%- if image.aspectRatio >= 1.75 %} aspect-wide
                 {%- elseif image.aspectRatio < 0.7 %} aspect-tall
                 {%- else %} aspect-normal{% endif %}"
                 style = "
