@@ -71,7 +71,7 @@ A typical return value from this function looks like:
         attachments: [
             {
                 id: 123,
-                caption, attribution,
+                caption, attribution, index,
                 full: {url, width, height},
                 medium: {url, width, height},
                 small: {url, width, height},
@@ -108,7 +108,7 @@ const query = (page) =>
     );
 
 const formatAttachment = ({id, attributes}) => {
-    const {caption, attribution} = attributes;
+    const {caption, attribution, index} = attributes;
     const resource = attributes.resource.data[0].attributes;
     const full = {
         url: resource.url,
@@ -117,7 +117,7 @@ const formatAttachment = ({id, attributes}) => {
     };
     const aspectRatio =
         Math.trunc((resource.width / resource.height) * 100) / 100;
-    const attachment = {id, caption, attribution, full, aspectRatio};
+    const attachment = {id, caption, attribution, index, full, aspectRatio};
 
     if (resource.formats) {
         const formats = Object.entries(resource.formats);
@@ -165,7 +165,9 @@ const formatEpisode = ({id, attributes}) => {
 
     const audio = formatAudio(attributes.audio.data);
     const topics = [];
-    const attachments = attributes.attachments.data.map(formatAttachment);
+    const attachments = attributes.attachments.data
+        .map(formatAttachment)
+        .sort((a, b) => a.index - b.index);
     return {
         id,
         ep_num,
