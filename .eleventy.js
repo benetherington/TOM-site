@@ -52,16 +52,7 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy({'templates/img': 'img'});
     eleventyConfig.addPassthroughCopy({'templates/icon': 'icon'});
     eleventyConfig.addPassthroughCopy({'templates/font': 'font'});
-    eleventyConfig.addPassthroughCopy({'templates/app.js': 'app.js'});
-    eleventyConfig.addPassthroughCopy({
-        'templates/pagination.js': 'pagination.js',
-    });
-    eleventyConfig.addPassthroughCopy({
-        'templates/masonry.pkgd.min.js': 'masonry.pkgd.min.js',
-    });
-    eleventyConfig.addPassthroughCopy({
-        'templates/episode.js': 'episode.js',
-    });
+    eleventyConfig.addPassthroughCopy({'templates/js': 'js'});
 
     // Data
     eleventyConfig.addGlobalData('builtAt', () => new Date().toUTCString());
