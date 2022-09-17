@@ -3,20 +3,23 @@
 \* ------------ */
 .episode-card {
     display: block;
-    padding: 20px 20px 50px 20px;
+    padding: 15px 20px 25px;
+    margin: 15px 0;
     color: revert;
+    cursor: pointer;
 }
 .episode-card:hover {
     background-color: var(--button-tab-color);
-    transition: box-shadow 200ms;
-    box-shadow: 1px 2px 5px rgba(0 0 0 / 0.45)
+    box-shadow: 1px 2px 5px rgba(0 0 0 / 0.45);
+    transition:
+        background-color 100ms,
+        box-shadow 300ms;
 }
 
 .episode-title {
     font-family: Prompt;
-    text-decoration: underline 2px;
-    font-weight: 500;
-    font-size: 35px;
+    text-decoration: underline 1px;
+    font-size: 30px;
 }
 
 .episode-card .image-to-the-side {
