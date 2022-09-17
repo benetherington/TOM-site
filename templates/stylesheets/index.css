@@ -21,6 +21,12 @@
     text-decoration: underline 1px;
     font-size: 30px;
 }
+.episode-title::before { content: "Episode "}
+
+@media screen and (max-width: 850px) {
+    /* Small and medium screens show a contracted title */
+    .episode-title::before { content: "Ep. "}
+}
 
 .episode-card .image-to-the-side {
     display: grid;

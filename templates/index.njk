@@ -16,7 +16,7 @@ permalink: "{% if pagination.pageNumber > 0 %}jump-{{ pagination.items[0][pagina
 {% for episode in pagination.items[0] %}
     <div class="episode-card" data-href={{ episode.slug | absoluteSlug }}>
         <div class="episode-title">
-            {{ episode | fullTitle }}
+            {{- episode.ep_num + ": " + episode.title }}
         </div>
         <div class="image-to-the-side">
             <div class="thumbnail" style="background-image: url({{ episode.attachments[0].thumbnail.url }});"></div>
