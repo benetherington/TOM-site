@@ -6,15 +6,18 @@ pagination:
 permalink: "{% if pagination.pageNumber > 0 %}jump-{{ pagination.items[0][pagination.items[0].length-1].ep_num }}/{% endif %}index.html"
 ---
 
+
 {% block script %}
+    <script src="/js/index.js"></script>
     <script src="/js/pagination.js"></script>
 {% endblock %}
 
+
 {% for episode in pagination.items[0] %}
-    <div class="episode-card">
-        <a class="episode-title" href={{ "/show-notes/" + episode.slug | url }}>
+    <div class="episode-card" data-href={{ episode.slug | absoluteSlug }}>
+        <div class="episode-title">
             {{ episode | fullTitle }}
-        </a>
+        </div>
         <div class="image-to-the-side">
             <div class="thumbnail" style="background-image: url({{ episode.attachments[0].thumbnail.url }});"></div>
             <p class="published-at">{{ episode.publishedAt | shortDate }}</p>
@@ -22,6 +25,7 @@ permalink: "{% if pagination.pageNumber > 0 %}jump-{{ pagination.items[0][pagina
         </div>
     </div>
 {% endfor %}
+
 
 <center>
     <div id="pagination-label">
