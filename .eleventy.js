@@ -15,11 +15,20 @@ const shortDate = (date) =>
 const rfcDate = (date) => new Date(date).toUTCString();
 
 // Base URL for absolute links
-const isDev = process.env.ELEVENTY_ENV === 'development';
-const baseUrl = isDev
-    ? `localhost:8080`
-    : `https://www.theorbitalmechanics.com/`;
-const absoluteSlug = (slug) => new URL(`/show-notes/${slug}`, baseUrl).href;
+const isProd = process.env.ELEVENTY_SERVERLESS;
+const baseUrl = isProd
+    ? 'https://www.theorbitalmechanics.com/'
+    : 'http://localhost:8080/';
+
+// Episode pages are nested in show-notes for tidy organization, but the routing
+// from /slug to /show-notes/slug only works on Strapi's server. To allow
+// Eleventy to serve files (with its nice auto-reload feature), we'll generate
+// the real path while in dev, and the pretty path while in prod. Two filters
+// required, as only episode pages are affected.
+const absoluteSlug = (slug) => {
+    const path = isProd ? slug : `/show-notes/${slug}`;
+    return new URL(path, baseUrl).href;
+};
 const absolutePath = (path) => new URL(path, baseUrl).href;
 
 /*---------*\
