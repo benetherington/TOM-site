@@ -42,9 +42,16 @@
 /* --------------- *\
    Attached images
 \* --------------- */
-/* Masonry grid */
-#attachments {
-    margin: 0 3%;
+/* Image container */
+#attachments { margin: 0 3%; }
+
+@media screen and (max-width: 650px) {
+    /* On mobile displays, masonry layout is overridden and we switch to a flex
+    column layout. */
+    #attachments {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 /* Image/caption container */
@@ -53,8 +60,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    aspect-ratio: 1/1;
-    max-width: var(--full-width);
+    align-items: center;
     
     transition:
         width 200ms ease,
@@ -63,11 +69,23 @@
         top 200ms ease;
 }
 
+@media screen and (max-width: 650px) {
+    .attachment {
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        width: 100% !important;
+    }
+    .attachment .image {
+        aspect-ratio: var(--aspect-ratio);
+    }
+}
+
 /* Image */
 .attachment .image {
-    width: calc(100% - 5px);
-    flex-grow: 1;
-    padding: 5px;
+    width: 100%;
+    max-width: var(--full-width);
+    aspect-ratio: var(--aspect-ratio);
     
     background-size: cover;
     background-repeat: no-repeat;
@@ -96,25 +114,49 @@
     color: var(--default-text);
 }
 
-/* Size variants for masonry layout */
-.attachment.aspect-tall {
-    width: calc(20%);
-    aspect-ratio: 1/2;
-}
-.attachment.aspect-normal {
-    width: calc(40%);
-}
-.attachment.aspect-wide {
-    width: calc(60%);
-    aspect-ratio: 2/1;
-}
-.attachment.expanded {
-    z-index: 1;
+
+/*
+Masonry grid
+
+There are two item widths, .aspect-normal and .aspect-wide. Up to three -normals
+can share a row, and a -normal and -wide can share a row.
+
+Column width is (100% - gutter% * 2) / 3 .
+.aspect-normal fills the column width.
+.aspect-wide fills two columns and a gutter.
+
+|-------|.|-------|.|-------|
+|-------|.|-------|.|-------|
+|-------|.|-------|.|-------|
+
+|-----------------|.|-------|
+|-----------------|.|-------|
+|-----------------|.|-------|
+
+The gutter size should match the left/right margin of #attachments.
+*/
+.gutter-sizer { width: 3%; }
+.column-sizer { width: 31.3%; }
+@media screen and (min-width: 651px) {
+    /* Size variants for masonry layout */
+    .aspect-tall { width: 31.3%; }
+    .aspect-tall .image { aspect-ratio: 1/2; }
     
-    /* TODO: eliminate animation bounce by directly setting height and width
-    instead of width and aspect ratio */
-    width: 100%;
-    aspect-ratio: calc(var(--aspect-ratio));
+    .aspect-normal { width: 31.3%; }
+    .aspect-normal .image { aspect-ratio: 1/1; }
+    
+    .aspect-wide { width: 65.6%; }
+    .aspect-wide .image { aspect-ratio: 2/1; }
+    
+    .attachment.expanded {
+        z-index: 1;
+        width: 100%;
+    }
+    .attachment.expanded .image {
+        /* TODO: eliminate animation bounce by directly setting height and width
+        instead of width and aspect ratio */
+        aspect-ratio: var(--aspect-ratio);
+    }
 }
 
 
