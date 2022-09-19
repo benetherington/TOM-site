@@ -18,8 +18,10 @@
         "@strapi/plugin-users-permissions": "4.3.2",
         "@strapi/strapi": "4.3.2",
         "better-sqlite3": "7.4.6",
+        "get-pixels": "^3.3.3",
         "music-metadata": "^8.0.1",
         "nunjucks": "^3.2.3",
+        "quantize": "^1.0.2",
         "turndown": "^7.1.1"
     },
     "author": {

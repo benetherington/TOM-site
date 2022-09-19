@@ -1,14 +1,20 @@
 const headers = [
     {
-        url: '/img/header--cygnus_iss.jpg',
+        full: {
+            url: '/img/header--cygnus_iss.jpg',
+        },
         textStyle: 'light-text',
     },
     {
-        url: '/img/header--jwst_first_deep_field.png',
+        full: {
+            url: '/img/header--jwst_first_deep_field.png',
+        },
         textStyle: 'light-text',
     },
     {
-        url: '/img/header--sls_flower.jpg',
+        full: {
+            url: '/img/header--sls_flower.jpg',
+        },
         textStyle: 'dark-text',
     },
 ];

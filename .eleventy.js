@@ -6,8 +6,24 @@ const fullTitle = (attributes) =>
     `Episode ${attributes.ep_num}: ${attributes.title}`;
 const wrapTitle = (attributes) =>
     `Episode ${attributes.ep_num}:<br>${attributes.title}`;
-const headerImageStyle = (url) =>
-    url ? `#header-banner {background-image: url(${url});}` : null;
+const styleHeader = (attachment) => {
+    if (!attachment) return;
+
+    const style = [];
+    if (attachment.full)
+        style.push(
+            `#header-banner {background-image: url(${attachment.full.url});}`,
+        );
+    if (attachment.colors) {
+        const colors = JSON.parse(attachment.colors);
+        style.push(`.header-title {
+            color: rgb(${colors[0]});
+            text-shadow: 0 0 20px rgb(${colors[1]}), 0 0 10px rgb(${colors[1]});
+        }`);
+    }
+
+    return style.join('');
+};
 
 // Date formats
 const shortDate = (date) =>
@@ -69,11 +85,11 @@ module.exports = function (eleventyConfig) {
     // Filters
     eleventyConfig.addNunjucksFilter('fullTitle', fullTitle);
     eleventyConfig.addNunjucksFilter('wrapTitle', wrapTitle);
+    eleventyConfig.addNunjucksFilter('styleHeader', styleHeader);
     eleventyConfig.addNunjucksFilter('formatNotes', formatNotes);
     eleventyConfig.addNunjucksFilter('formatRssNotes', formatRssNotes);
     eleventyConfig.addNunjucksFilter('shortDate', shortDate);
     eleventyConfig.addNunjucksFilter('rfcDate', rfcDate);
-    eleventyConfig.addNunjucksFilter('headerImageStyle', headerImageStyle);
     eleventyConfig.addNunjucksFilter('absoluteSlug', absoluteSlug);
     eleventyConfig.addNunjucksFilter('absolutePath', absolutePath);
 

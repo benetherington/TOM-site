@@ -1,28 +1,43 @@
-body {
-    --banner-expansion: 40vh;
-    --content-width: max(70vw, 600px);
+@media screen and (min-width: 851px) {
+    body {
+        --banner-expansion: 40vh;
+        --content-width: max(70vw, 600px);
+    }
 }
 
 
-/* --------------- *\
-   Title in header
-\* --------------- */
-#header-banner.dark-text .header-title {
-    color: #959595;
-    text-shadow: 0 0 20px #959595;
-}
-
-.header-title {
+/* ------------- *\
+   Episode title
+\* ------------- */
+#header-title {
     width: var(--content-width);
     margin-left: var(--sidebar-width);
     
     font-family: Prompt;
-    font-size: var(--banner-collapsed-height);
+    font-size: max(
+        var(--banner-collapsed-height),
+        5vh
+    );
     text-align: center;
     color: #d2d2d2;
     text-shadow: 0 0 20px #404040;
 }
 
+#body-title {
+    display: none;
+    
+    margin: 20px 0 40px;
+    
+    font-family: Prompt;
+    text-decoration: underline 1px;
+    font-size: 30px;
+    text-align: center;
+}
+@media screen and (max-width: 650px) {
+    /* On small screens, the header appears above the show notes. */
+    #body-title { display: block; }
+    #header-title { display: none; }
+}
 
 /* --------------- *\
    Attached images

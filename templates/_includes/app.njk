@@ -9,7 +9,7 @@
         {% block css %}{% endblock %}
         <style>
             {% block headerStyle %}
-                {{ headers.randomHeaders[0].url | headerImageStyle}}
+                {{ headers.randomHeaders[0] | styleHeader }}
             {% endblock %}
         </style>
         <script src="/js/app.js"></script>
@@ -26,10 +26,7 @@
             {% include "../img/banner-logo.svg" %}
         </a>
         
-        <div
-            id="header-banner"
-            class="{{ headers.randomHeaders[0].textStyle }}"
-        >
+        <div id="header-banner">
             {% block headerText %}{% endblock %}
         </div>
         
