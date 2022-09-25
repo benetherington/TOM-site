@@ -8,7 +8,7 @@ module.exports = (config, {strapi}) => {
     // SLUG
     strapi.server.router.get(
         'slug',
-        '/:slug([a-z]+(?:-[a-z0-9]+)*)',
+        '/:slug((?!admin)[a-z]+(?:-[a-z0-9]+)*)',
         async (ctx, next) => {
             const {slug} = ctx.params;
 
