@@ -39,7 +39,7 @@ const updateDuration = async (event) => {
     }
 
     // Edit episode data
-    data.audio_duration_sec = await getAudioDuration(data.audio);
+    data.audio_duration_sec = await getAudioDuration(data.audio.id);
 };
 
 module.exports = {
