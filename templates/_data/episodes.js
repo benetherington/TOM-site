@@ -89,15 +89,11 @@ const query = (page) =>
         {
             fields: '*',
             populate: {
-                attachments: {
-                    populate: {
-                        caption: true,
-                        attribution: true,
-                        resource: '*',
-                    },
+                images: {
+                    populate: {resource: '*'},
                 },
                 audio: {
-                    populate: ['*'],
+                    populate: '*',
                 },
             },
             sort: ['ep_num:desc'],
@@ -107,9 +103,9 @@ const query = (page) =>
         {encodeValuesOnly: true}, // prettify URL
     );
 
-const formatAttachment = ({id, attributes}) => {
-    const {caption, attribution, index, colors} = attributes;
-    const resource = attributes.resource.data[0].attributes;
+const formatImageGroup = (imageGroup) => {
+    const {id, caption, attribution, colors} = imageGroup;
+    const resource = imageGroup.resource.data.attributes;
     const full = {
         url: resource.url,
         width: resource.width,
@@ -117,11 +113,10 @@ const formatAttachment = ({id, attributes}) => {
     };
     const aspectRatio =
         Math.trunc((resource.width / resource.height) * 100) / 100;
-    const attachment = {
+    const image = {
         id,
         caption,
         attribution,
-        index,
         colors,
         full,
         aspectRatio,
@@ -130,7 +125,7 @@ const formatAttachment = ({id, attributes}) => {
     if (resource.formats) {
         const formats = Object.entries(resource.formats);
         formats.forEach(([name, attrs]) => {
-            attachment[name] = {
+            image[name] = {
                 url: attrs.url,
                 width: attrs.width,
                 height: attrs.height,
@@ -138,14 +133,15 @@ const formatAttachment = ({id, attributes}) => {
         });
     }
 
-    return attachment;
+    return image;
 };
 
-const formatAudio = (data) => {
+const formatAudio = (audio) => {
+    if (!audio || !audio.data) return;
     return {
-        mime: data.attributes.mime,
-        size: data.attributes.size,
-        url: data.attributes.url,
+        mime: audio.data.attributes.mime,
+        size: audio.data.attributes.size,
+        url: audio.data.attributes.url,
     };
 };
 
@@ -160,6 +156,7 @@ const formatEpisode = ({id, attributes}) => {
         audio_duration_sec,
     } = attributes;
 
+    // Return null if this episode has incomplete data
     const complete = [
         ep_num,
         publishedAt,
@@ -168,14 +165,15 @@ const formatEpisode = ({id, attributes}) => {
         description,
         show_notes,
         audio_duration_sec,
+        attributes.audio,
     ].every((e) => e);
     if (!complete) return;
 
-    const audio = formatAudio(attributes.audio.data);
+    const audio = formatAudio(attributes.audio);
     const topics = [];
-    const attachments = attributes.attachments.data
-        .map(formatAttachment)
-        .sort((a, b) => a.index - b.index);
+    const attachments = attributes.images
+        ? attributes.images.map(formatImageGroup)
+        : [];
     return {
         id,
         ep_num,
@@ -193,10 +191,10 @@ const formatEpisode = ({id, attributes}) => {
 
 module.exports = async () => {
     let page = 1;
-    let doneFetching = false;
+    let pageCount = 2;
     const episodes = [];
 
-    while (!doneFetching) {
+    while (page <= pageCount) {
         // Build and send request
         const response = await fetch(`${baseUrl}/api/episodes?${query(page)}`);
         const jsn = await response.json();
@@ -204,21 +202,19 @@ module.exports = async () => {
         // Check response
         if (jsn.errors) {
             throw new Error({
-                msg: 'Eleventy encountered an issue with CMS API.',
+                msg: 'Eleventy encountered an issue with Strapi API.',
                 errors: jsn.errors,
             });
         }
 
-        // Format response
+        // Yield formatted episodes, discard those that fail spec
         const formattedEpisodes = jsn.data.map(formatEpisode);
+        const filteredEpisodes = formattedEpisodes.filter((ep) => ep);
+        episodes.push(...filteredEpisodes);
 
-        // Store response
-        episodes.push(...formattedEpisodes);
-
-        // Are we done?
-        if (jsn.meta.pagination.pageCount > page) ++page;
-        else doneFetching = true;
+        // Update pagination
+        page += 1;
+        pageCount = jsn.meta.pagination.pageCount;
     }
-
-    return episodes.filter((e) => e);
+    return episodes;
 };
