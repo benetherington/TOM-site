@@ -26,13 +26,15 @@ const getColors = async (url) => {
 };
 
 const updateColors = async (image) => {
-    const imageGroup = await strapi
-        .query('image.image-group')
-        .findOne({where: {id: image.id}, populate: {resource: true}});
+    const imageGroup = await strapi.entityService.findOne(
+        'image.image-group',
+        image.id,
+        {populate: {resource: true}},
+    );
     const colors = await getColors(imageGroup.resource.url);
-    await strapi
-        .query('image.image-group')
-        .update({where: {id: image.id}, data: {colors}});
+    await strapi.entityService.update('image.image-group', image.id, {
+        data: {colors},
+    });
 };
 
 module.exports = async (event) => {
