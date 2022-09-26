@@ -31,9 +31,7 @@ const rfcDate = (date) => new Date(date).toUTCString();
 
 // Base URL for absolute links
 const isDev = process.env.npm_lifecycle_script.includes('--serve');
-const baseUrl = isDev
-    ? 'http://localhost:8080/'
-    : 'https://www.theorbitalmechanics.com/';
+const baseUrl = isDev ? 'http://localhost:8080/' : 'http://localhost:1337/'; //'https://www.theorbitalmechanics.com/';
 
 // Episode pages are nested in show-notes for tidy organization, but the routing
 // from /slug to /show-notes/slug only works on Strapi's server. To allow
