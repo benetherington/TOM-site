@@ -53,6 +53,10 @@
         },
         "audio_duration_sec": {
             "type": "biginteger"
+        },
+        "images": {
+            "type": "dynamiczone",
+            "components": ["image.image-group"]
         }
     }
 }

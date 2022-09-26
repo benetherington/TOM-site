@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_image_image_groups",
+  "info": {
+    "displayName": "Image group",
+    "icon": "address-card",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "resource": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "caption": {
+      "type": "string"
+    },
+    "attribution": {
+      "type": "string"
+    },
+    "colors": {
+      "type": "json"
+    }
+  }
+}
