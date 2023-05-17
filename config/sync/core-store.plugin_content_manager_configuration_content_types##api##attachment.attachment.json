@@ -1,0 +1,163 @@
+{
+  "key": "plugin_content_manager_configuration_content_types::api::attachment.attachment",
+  "value": {
+    "uid": "api::attachment.attachment",
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 100,
+      "mainField": "caption",
+      "defaultSortBy": "caption",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "caption": {
+        "edit": {
+          "label": "caption",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "caption",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "attribution": {
+        "edit": {
+          "label": "attribution",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "attribution",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "resource": {
+        "edit": {
+          "label": "resource",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "resource",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "index": {
+        "edit": {
+          "label": "index",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "index",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "colors": {
+        "edit": {
+          "label": "colors",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "colors",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "createdAt": {
+        "edit": {
+          "label": "createdAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "createdAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedAt": {
+        "edit": {
+          "label": "updatedAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "updatedAt",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "list": [
+        "id",
+        "caption",
+        "attribution",
+        "resource"
+      ],
+      "edit": [
+        [
+          {
+            "name": "caption",
+            "size": 6
+          },
+          {
+            "name": "attribution",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "resource",
+            "size": 6
+          },
+          {
+            "name": "index",
+            "size": 4
+          }
+        ],
+        [
+          {
+            "name": "colors",
+            "size": 12
+          }
+        ]
+      ],
+      "editRelations": []
+    }
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

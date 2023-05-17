@@ -1,0 +1,25 @@
+{
+  "name": "Public",
+  "description": "Default role given to unauthenticated user.",
+  "type": "public",
+  "permissions": [
+    {
+      "action": "api::attachment.attachment.find"
+    },
+    {
+      "action": "api::attachment.attachment.findOne"
+    },
+    {
+      "action": "api::episode.episode.find"
+    },
+    {
+      "action": "api::episode.episode.findOne"
+    },
+    {
+      "action": "api::topic.topic.find"
+    },
+    {
+      "action": "api::topic.topic.findOne"
+    }
+  ]
+}

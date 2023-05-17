@@ -1,0 +1,25 @@
+{
+  "name": "Authenticated",
+  "description": "Default role given to authenticated user.",
+  "type": "authenticated",
+  "permissions": [
+    {
+      "action": "api::episode.episode.create"
+    },
+    {
+      "action": "api::episode.episode.delete"
+    },
+    {
+      "action": "api::episode.episode.find"
+    },
+    {
+      "action": "api::episode.episode.findOne"
+    },
+    {
+      "action": "api::episode.episode.update"
+    },
+    {
+      "action": "plugin::users-permissions.user.me"
+    }
+  ]
+}

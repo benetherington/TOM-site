@@ -1,0 +1,256 @@
+{
+  "key": "plugin_content_manager_configuration_content_types::api::episode.episode",
+  "value": {
+    "uid": "api::episode.episode",
+    "settings": {
+      "bulkable": false,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 100,
+      "mainField": "title",
+      "defaultSortBy": "ep_num",
+      "defaultSortOrder": "DESC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "ep_num": {
+        "edit": {
+          "label": "ep_num",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "ep_num",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "title": {
+        "edit": {
+          "label": "title",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "title",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "slug": {
+        "edit": {
+          "label": "slug",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "slug",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "description": {
+        "edit": {
+          "label": "description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "description",
+          "searchable": true,
+          "sortable": false
+        }
+      },
+      "show_notes": {
+        "edit": {
+          "label": "show_notes",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "show_notes",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "audio": {
+        "edit": {
+          "label": "audio",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "audio",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "attachments": {
+        "edit": {
+          "label": "attachments",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "caption"
+        },
+        "list": {
+          "label": "attachments",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "topics": {
+        "edit": {
+          "label": "topics",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "name"
+        },
+        "list": {
+          "label": "topics",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "audio_duration_sec": {
+        "edit": {
+          "label": "audio_duration_sec",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "audio_duration_sec",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "images": {
+        "edit": {
+          "label": "images",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "images",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "createdAt": {
+        "edit": {
+          "label": "createdAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "createdAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedAt": {
+        "edit": {
+          "label": "updatedAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "updatedAt",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "list": [
+        "ep_num",
+        "title",
+        "description",
+        "topics",
+        "id",
+        "attachments"
+      ],
+      "edit": [
+        [
+          {
+            "name": "ep_num",
+            "size": 4
+          },
+          {
+            "name": "title",
+            "size": 4
+          },
+          {
+            "name": "slug",
+            "size": 4
+          }
+        ],
+        [
+          {
+            "name": "audio",
+            "size": 6
+          },
+          {
+            "name": "description",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "show_notes",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "audio_duration_sec",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "images",
+            "size": 12
+          }
+        ]
+      ],
+      "editRelations": [
+        "attachments",
+        "topics"
+      ]
+    }
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}
