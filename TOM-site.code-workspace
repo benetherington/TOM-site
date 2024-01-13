@@ -1,16 +1,10 @@
 {
-	"folders": [
-		{
-			"path": "."
-		},
-		{
-			"path": "node_modules\\@strapi\\strapi\\lib"
-		},
-		{
-			"path": "E:\\TOM-scrape"
-		}
-	],
-	"settings": {
-		"powershell.cwd": "c:\\Users\\Ben\\projects\\TOM-site"
-	}
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "powershell.cwd": "c:\\Users\\Ben\\projects\\TOM-site"
+    }
 }
